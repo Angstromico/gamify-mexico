@@ -1,0 +1,132 @@
+---
+interface RegistrationFormProps {
+  title?: string;
+  nameLabel?: string;
+  emailLabel?: string;
+  passwordLabel?: string;
+  confirmPasswordLabel?: string;
+  submitButtonText?: string;
+  loginText?: string;
+  loginLink?: string;
+  namePlaceholder?: string;
+  emailPlaceholder?: string;
+  passwordPlaceholder?: string;
+  confirmPasswordPlaceholder?: string;
+}
+
+// Default prop values
+const {
+  title = "Regístrate",
+  nameLabel = "Nombre",
+  emailLabel = "Email",
+  passwordLabel = "Contraseña",
+  confirmPasswordLabel = "Confirmar Contraseña",
+  submitButtonText = "Registro",
+  loginText = "Ya tienes cuenta? Login",
+  loginLink = "/login",
+  namePlaceholder = "Tu nombre",
+  emailPlaceholder = "correo@ejemplo.com",
+  passwordPlaceholder = "********",
+  confirmPasswordPlaceholder = "********",
+} = Astro.props as RegistrationFormProps;
+---
+
+<section class="flex items-center justify-center min-h-screen text-white">
+  <div class="w-full max-w-md rounded-lg shadow-md p-6">
+    <h1 class="text-2xl font-semibold text-center">{title}</h1>
+
+    <form id="registrationForm" class="mt-6 space-y-4">
+      <!-- Name -->
+      <div>
+        <label for="name" class="block text-sm font-medium">{nameLabel}</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder={namePlaceholder}
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium">{emailLabel}</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder={emailPlaceholder}
+        />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-medium">{passwordLabel}</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder={passwordPlaceholder}
+        />
+      </div>
+
+      <!-- Confirm Password -->
+      <div>
+        <label for="confirm-password" class="block text-sm font-medium">{confirmPasswordLabel}</label>
+        <input
+          type="password"
+          id="confirm-password"
+          name="confirm-password"
+          required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          placeholder={confirmPasswordPlaceholder}
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          {submitButtonText}
+        </button>
+      </div>
+    </form>
+
+    <!-- Login Link -->
+    <p class="mt-4 text-center text-sm text-white">
+      {loginText}{' '}
+      <a href={loginLink} class="font-medium text-indigo-600 hover:text-indigo-500">Login</a>
+    </p>
+  </div>
+
+  <script>
+  document.getElementById('registrationForm')?.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const nameInput = document.getElementById('name') as HTMLInputElement | null;
+    const emailInput = document.getElementById('email') as HTMLInputElement | null;
+    const passwordInput = document.getElementById('password') as HTMLInputElement | null;
+    const confirmPasswordInput = document.getElementById('confirm-password') as HTMLInputElement | null;
+
+    if (nameInput && emailInput && passwordInput && confirmPasswordInput) {
+      const name = nameInput.value;
+      const email = emailInput.value;
+      const password = passwordInput.value;
+      const confirmPassword = confirmPasswordInput.value;
+
+      console.log("Form submitted with:", { name, email, password, confirmPassword });
+
+      // Perform your form submission logic here (e.g., send a fetch request)
+    } else {
+      console.error("One or more input fields are not found.");
+    }
+  });
+</script>
+</section>

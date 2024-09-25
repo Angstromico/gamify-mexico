@@ -1,0 +1,144 @@
+---
+import ViewTransitions from 'astro/components/ViewTransitions.astro'
+import { siteInfo } from '@globals/site-info'
+import  { Header, Footer } from '@components/index'
+import { LangPicker, ButtonGradient } from '@components/index.astro' 
+
+interface Props {
+ lang?: string 
+ title?: string
+ image?: string
+ description?: string
+}
+
+const {lang = siteInfo.lang, title = siteInfo.title, image = siteInfo.image, description = siteInfo.description} = Astro.props
+
+const siteUrl = Astro.url.href
+---
+
+
+<!DOCTYPE html>
+ <html lang="es">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="generator" content={Astro.generator} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <ViewTransitions />
+  <meta name="description" content={description} />
+	<meta name="author" content="Manuel Morales" />
+	<meta property="og:locale" content={lang} />
+  <meta property="og:type" content="website" />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={siteUrl} />
+		<meta property="og:site_name" content={title} />
+		<meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={image} />
+  <meta name="og:image" content={image} />
+  </head>
+  <body>
+   <Header client:load />
+   <ButtonGradient />
+   <LangPicker />
+   <slot />
+   <Footer client:visible />
+  </body>
+</html>
+
+<style is:global>
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
+
+:root {
+  --font-sora: "Sora", sans-serif;
+  --font-code: "Source Code Pro", monospace;
+  --font-grotesk: "Space Grotesk", sans-serif;
+  color-scheme: dark;
+}
+
+* {
+  scroll-behavior: smooth
+}
+
+
+body {
+  @apply font-sans bg-n-8 text-n-1 text-base;
+}
+
+.rotate-45 {
+  @apply rotate-[45deg];
+}
+
+.rotate-90 {
+  @apply rotate-[90deg];
+}
+
+.rotate-135 {
+  @apply rotate-[135deg];
+}
+
+.rotate-180 {
+  @apply rotate-[180deg];
+}
+
+.rotate-225 {
+  @apply rotate-[225deg];
+}
+
+.rotate-270 {
+  @apply rotate-[270deg];
+}
+
+.rotate-315 {
+  @apply rotate-[315deg];
+}
+
+.rotate-360 {
+  @apply rotate-[360deg];
+}
+
+.-rotate-45 {
+  @apply rotate-[-45deg];
+}
+
+.-rotate-90 {
+  @apply rotate-[-90deg];
+}
+
+.-rotate-135 {
+  @apply rotate-[-135deg];
+}
+
+.-rotate-180 {
+  @apply rotate-[-180deg];
+}
+
+.-rotate-225 {
+  @apply rotate-[-225deg];
+}
+
+.-rotate-270 {
+  @apply rotate-[-270deg];
+}
+
+.-rotate-315 {
+  @apply rotate-[-315deg];
+}
+
+.-rotate-360 {
+  @apply rotate-[-360deg];
+}
+
+/* .radialBlur {
+  filter: blur(5px);
+} */
+.mask-image {
+  background: radial-gradient(circle, transparent 20%, rgba(255, 255, 255, 0.8) 80%);
+  filter: blur(2px); /* Adjust the blur strength as needed */
+}
+</style>

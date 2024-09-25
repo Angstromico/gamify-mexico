@@ -1,0 +1,110 @@
+import {
+  benefitIcon1,
+  benefitIcon2,
+  benefitIcon3,
+  benefitIcon4,
+  benefitImage2,
+  chromecast,
+  disc02,
+  discord,
+  discordBlack,
+  facebook,
+  figma,
+  file02,
+  framer,
+  glogo,
+  homeSmile,
+  instagram,
+  notification2,
+  notification3,
+  notification4,
+  notion,
+  photoshop,
+  plusSquare,
+  protopie,
+  raindrop,
+  recording01,
+  recording03,
+  roadmap1,
+  roadmap2,
+  roadmap3,
+  roadmap4,
+  searchMd,
+  slack,
+  sliders04,
+  telegram,
+  twitter,
+  yourlogo,
+} from '../assets'
+
+export const navigation = [
+  {
+    id: 2,
+    title: 'Hero',
+    titulo: 'Banner',
+    url: '#hero',
+    link: '#hero',
+    onlyMobile: false,
+  },
+  {
+    id: 2,
+    title: 'Video',
+    titulo: 'Video',
+    url: '#video',
+    link: '#video',
+    onlyMobile: false,
+  },
+  {
+    id: '4',
+    title: 'New account',
+    titulo: 'Nueva cuenta',
+    url: '/en/signup',
+    link: '/signup',
+    onlyMobile: true,
+  },
+  {
+    id: '5',
+    title: 'Login',
+    titulo: 'Login',
+    url: '/en/login',
+    link: '/login',
+    onlyMobile: true,
+  },
+]
+
+export const heroIcons = [homeSmile, file02, searchMd, plusSquare]
+
+export const companyLogos = [glogo, glogo, glogo, glogo, glogo]
+
+export const socials = [
+  {
+    id: '0',
+    title: 'Discord',
+    iconUrl: discordBlack,
+    url: '#',
+  },
+  {
+    id: '1',
+    title: 'Twitter',
+    iconUrl: twitter,
+    url: '#',
+  },
+  {
+    id: '2',
+    title: 'Instagram',
+    iconUrl: instagram,
+    url: '#',
+  },
+  {
+    id: '3',
+    title: 'Telegram',
+    iconUrl: telegram,
+    url: '#',
+  },
+  {
+    id: '4',
+    title: 'Facebook',
+    iconUrl: facebook,
+    url: '#',
+  },
+]

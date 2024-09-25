@@ -1,0 +1,10 @@
+.firstHiddenDiv,
+.secondHiddenDiv {
+  @apply hidden absolute top-0 h-full bg-stroke-1 pointer-events-none md:block;
+}
+.firstHiddenDiv {
+  @apply left-5 w-0.25 lg:left-7.5 xl:left-10;
+}
+.secondHiddenDiv {
+  @apply right-5 w-0.25 lg:right-7.5 xl:right-10;
+}

@@ -1,0 +1,9 @@
+---
+import DefaultLayout from "@layouts/DefaultLayout.astro" 
+import {Hero, Video} from '@components/index'
+---
+
+<DefaultLayout>
+	<Hero client:load />
+	<Video client:visible />
+</DefaultLayout>

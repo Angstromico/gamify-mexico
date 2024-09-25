@@ -1,0 +1,57 @@
+---
+import { languages } from '../i18n/ui' 
+import LangContainer from './LangContainer';
+
+const pathname = new URL(Astro.request.url).pathname
+---
+
+<LangContainer languages={languages} path={pathname} client:visible  /> 
+   
+
+
+<style is:global>  
+  .language-selector {
+  @apply fixed top-28 right-[2%] hidden md:flex items-center space-x-4 text-white dark:text-black z-50 font-bold;
+}
+
+.language-selector.scroll li a,
+.language-selector-mobile.scroll li a {
+  @apply bg-opacity-50;
+}
+
+.language-selector li,
+.language-selector-mobile ul li {
+  @apply relative;
+}
+
+.language-selector li a,
+.language-selector-mobile ul li a {
+  @apply block py-1 px-3 rounded-full bg-gray-700 dark:bg-gray-200 hover:bg-gray-600 dark:hover:bg-gray-100 transition-colors;
+  font-size: 14px; /* Reduced text size */
+}
+
+.language-selector li a.active,
+.language-selector-mobile ul li a.active {
+  @apply bg-violet-600 dark:bg-violet-600 hover:bg-violet-700 dark:hover:bg-violet-700; /* Changed blue to violet */
+}
+
+
+
+/* Mobile specific styles */
+.language-selector-mobile {
+  @apply flex md:hidden flex-col gap-4 fixed top-28 right-[2%] z-20 text-white font-bold dark:text-black; /* Moved down slightly */
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.language-selector-mobile > ul > li {
+  display: block;
+  margin: 0 10px;
+  @apply my-4;
+}
+
+.language-selector-mobile > ul > li > a {
+  @apply py-1 px-2;
+  font-size: 12px;
+}
+</style>

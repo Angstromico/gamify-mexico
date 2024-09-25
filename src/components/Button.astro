@@ -1,0 +1,28 @@
+---
+import ButtonSvg from './ButtonSvg.astro'
+
+interface Props {
+ link?: string
+ text: string
+ className?: string
+ px?: boolean
+ white?: boolean
+}
+
+const { link, text, className, px, white } = Astro.props
+
+const classes = `relative inline-flex items-center justify-center h-11 transition-colors hover:text-color-1 ${className ? className : ''} ${px ? 'px-7' : 'px-3'} ${white ? 'text-n-8' : 'text-n-1'}`
+
+---
+<>
+ {!link && <button class={classes}>
+  <span class="relative z-10">{text}</span>
+  <ButtonSvg />
+ </button>}
+
+ {link && <a href={link} class={classes}>
+  <span class="relative z-10">{text}</span>
+  <ButtonSvg />
+
+ </a>}
+</>

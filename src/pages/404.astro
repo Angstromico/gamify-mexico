@@ -1,0 +1,60 @@
+---
+import DefaultLayout from "@layouts/DefaultLayout.astro";
+import Error from "@components/Error";
+---
+
+<DefaultLayout >
+  <Error client:load />
+</DefaultLayout>
+
+<style is:global>
+  /* Container for the title, centers the content */
+  .container-title {
+    margin-bottom: 2rem; /* Adds space below the title section */
+    text-align: center; /* Centers the text */
+  }
+
+  /* Title class for aligning and spacing 404 digits and moon */
+  .title {
+    display: flex; /* Aligns 404 and the moon horizontally */
+    justify-content: center; /* Centers the title on the page */
+    align-items: center; /* Vertically aligns the digits and moon */
+    gap: 1rem; /* Adds space between the "4", moon, and "4" */
+    margin-top: 2rem; /* Adds margin on top of the title */
+  }
+
+ .moon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: violet; /* Light gray moon color */
+    border-radius: 50%; /* Makes the moon circular */
+    position: relative;
+  }
+
+  .face {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+.eyes {
+  position: absolute;
+  top: 30%;
+  left: 15%;
+  right: 15%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.eye-left, .eye-right {
+  width: 10px;
+  height: 10px;
+  background-color: black;
+  border-radius: 50%;
+}
+</style>
+
