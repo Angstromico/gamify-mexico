@@ -1,0 +1,44 @@
+---
+import Section from './Section'
+
+interface Props {
+  title: string
+  description: string
+  visionTitle: string
+  vision: string
+  missionTitle: string
+  mission: string
+  valuesTitle: string
+  values: string
+}
+
+const { title, description, visionTitle, vision, missionTitle, mission, valuesTitle, values } = Astro.props
+---
+
+<Section id='AboutUs' classes="container py-12 lg:py-20 text-center">
+  <h1 class="h1 text-color-1 mb-6">{title}</h1>
+  <p class="body-1 text-n-2 max-w-3xl mx-auto">
+    {description}
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    <div class="bg-n-12 p-8 rounded-lg shadow-lg">
+      <h2 class="h2 text-color-2 mb-4">{visionTitle}</h2>
+      <p class="body-2 text-n-3">
+        {vision}
+      </p>
+    </div>
+    <div class="bg-n-12 p-8 rounded-lg shadow-lg">
+      <h2 class="h2 text-color-3 mb-4">{missionTitle}</h2>
+      <p class="body-2 text-n-3">
+        {mission}
+      </p>
+    </div>
+    <div class="bg-n-12 p-8 rounded-lg shadow-lg">
+      <h2 class="h2 text-color-4 mb-4">{valuesTitle}</h2>
+      <p class="body-2 text-n-3">
+        {values}
+      </p>
+    </div>
+  </div>
+</Section>

@@ -1,9 +1,20 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
 import {Hero, Video} from '@components/index'
+import AboutUs from "@components/AboutUs.astro"
 ---
 
 <DefaultLayout>
 	<Hero client:load />
 	<Video client:visible />
+	<AboutUs 
+  title="About Us"
+  description="We are a passionate team dedicated to delivering innovative solutions."
+  visionTitle="Our Vision"
+  vision="To create a world where technology brings people together and empowers innovation."
+  missionTitle="Our Mission"
+  mission="We strive to provide high-quality solutions tailored to the needs of our clients."
+  valuesTitle="Our Values"
+  values="We prioritize innovation, integrity, and teamwork in everything we do."
+/>
 </DefaultLayout>
