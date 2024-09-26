@@ -78,6 +78,7 @@ import instagram from './socials/instagram.svg'
 import telegram from './socials/telegram.svg'
 import twitter from './socials/twitter.svg'
 import glogo from './glogo.png'
+import bingo from './bingo.jpg'
 
 export {
   brainwave,
@@ -152,4 +153,5 @@ export {
   neon,
   space,
   glogo,
+  bingo,
 }
