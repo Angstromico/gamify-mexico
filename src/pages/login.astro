@@ -1,7 +1,18 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro"
-import {  Login as LoginComponent} from "@components/index.astro"
+import LoginForm from "@components/login"
 ---
 <DefaultLayout title="Gamify Mexico" description="Login Page de Gamify Mexico">
- <LoginComponent />
+ <LoginForm
+      title="Iniciar sesión"
+      passwordLabel="Contraseña"
+      rememberMeLabel="Recuérdame"
+      forgotPasswordText="¿Olvidaste tu contraseña?"
+      forgotPasswordLink="/olvide-mi-contraseña"
+      submitButtonText="Iniciar sesión"
+      signUpText="¿No tienes cuenta? Regístrate"
+      signUpLink="/registrarse"
+      register="Regístrate"
+      client:load
+    />
 </DefaultLayout>

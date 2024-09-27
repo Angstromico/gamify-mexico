@@ -1,17 +1,25 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro"
-import {Signup as SignupComponent} from "@components/index.astro"
+import RegistrationForm from '@components/Signup'
+
 ---
 <DefaultLayout title="Pagina de Registro de Gamify Mexico" description="Pagina de Registro de Gamify Mexico">
- <SignupComponent 
-  title="Crea tu cuenta"
-  nameLabel="Name"
-  submitButtonText="Registrar"
-  namePlaceholder="Ingresa tu nombre"
-  emailPlaceholder="tu-email@ejemplo.com"
-  passwordPlaceholder="Crea una contraseña"
-  confirmPasswordPlaceholder="Confirma tu contraseña"
-/>
-<!-- Now give me this on English -->
+<RegistrationForm
+        title="Registrese"
+        nameLabel="Nombre"
+        emailLabel="Email"
+        passwordLabel="Clave"
+        confirmPasswordLabel="Confirmar Clave"
+        phoneLabel="Telefono"
+        submitButtonText="Registro"
+        loginText="Ya tienes cuenta? Entra"
+        loginLink="/login"
+        namePlaceholder="Tu nombre"
+        emailPlaceholder="tu@ejemplo.com"
+        passwordPlaceholder="********"
+        confirmPasswordPlaceholder="********"
+        phonePlaceholder="Tu telefono"
+        client:load
+      />
 </DefaultLayout>
 
