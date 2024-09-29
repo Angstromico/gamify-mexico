@@ -1,20 +1,35 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
-import {Hero, Video} from '@components/index'
+import { Hero, Video } from '@components/index'
 import AboutUs from "@components/AboutUs.astro"
+
+const aboutUs = `HELLO! Thank you for being here.
+GamifyMéxico is an emerging platform for interactive promotional and advertising entertainment that seeks to encourage your participation in meaningful connections.
+Our job is to bring sponsoring companies and brands closer to our vibrant community by offering real and unique experiences; streaming shows being our main tool.
+We are very proud of the cultural wealth and passion that distinguishes our land; we live in the beautiful country of Mexico.
+Welcome to GamifyMéxico, the interactive challenge that rewards you!`
+
+const description = `At GamifyMéxico, we are a dedicated team passionate about creating thrilling and unique experiences that connect players with brands and sponsors, fostering meaningful relationships within our vibrant community.`;
+
+const vision = `Our vision is to be a leader in the interactive entertainment industry, providing safe and engaging experiences that not only entertain but also promote connections between players and sponsoring brands.`;
+
+const mission = `Our mission is to develop innovative platforms and experiences that promote responsible gaming, ensuring that every interaction is enjoyable and enriching for our community.`;
+
+const values = `We value cultural richness, fairness, and player satisfaction, committing ourselves to create experiences that respect responsible gaming and enhance community engagement.`;
 ---
 
 <DefaultLayout>
 	<Hero client:load />
 	<Video client:visible />
 	<AboutUs 
-  title="About Us"
-  description="We are a dedicated team passionate about creating thrilling gambling experiences."
-  visionTitle="Our Vision"
-  vision="To lead the way in providing safe, exciting, and fair gambling games that entertain and engage players worldwide."
-  missionTitle="Our Mission"
-  mission="Our mission is to develop innovative gambling games that combine fun with responsible play, ensuring an enjoyable experience for all."
-  valuesTitle="Our Values"
-  values="We value fairness, player satisfaction, and responsible gaming as the core of every experience we offer."
-/>
+		title="About Us"
+		description={description}
+		visionTitle="Our Vision"
+		vision={vision}
+		missionTitle="Our Mission"
+		mission={mission}
+		valuesTitle="Our Values"
+		values={values}
+		largeText={aboutUs}
+	/>
 </DefaultLayout>

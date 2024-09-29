@@ -1,20 +1,35 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
-import {Hero, Video} from '@components/index'
+import { Hero, Video } from '@components/index'
 import AboutUs from "@components/AboutUs.astro"
+
+const aboutUS = `¡ HOLA ! Gracias por estar aqui.
+GamifyMéxico es una plataforma emergente de entretenimiento interactivo promocional y publicitario que busca fomentar tu participación en conexiones significativas. 
+Nuestro trabajo es acercar a empresas y marcas patrocinantes con nuestra vibrante comunidad ofreciendo experiencias reales y únicas; Siendo el streaming show nuestra principal herramienta.
+Muy orgullosos de la riqueza cultural y la pasión que distingue a nuestra tierra radicamos en el hermoso país de México. 
+¡ Bienvenidos a GamifyMéxico el desafío interactivo que te recompensa !`
+
+const description = `En GamifyMéxico, somos un equipo apasionado que se dedica a crear experiencias emocionantes y únicas, conectando a empresas y marcas con nuestra vibrante comunidad. Nuestra misión es ofrecer un entorno seguro y entretenido para todos los participantes.`;
+
+const vision = `Nuestra visión es ser pioneros en la industria del entretenimiento interactivo, brindando experiencias que no solo divierten, sino que también fomentan conexiones significativas entre los jugadores y las marcas.`;
+
+const mission = `Nuestra misión es desarrollar plataformas interactivas innovadoras que promuevan el juego responsable y la diversión, asegurando que cada usuario disfrute de una experiencia memorable y gratificante.`;
+
+const values = `Valoramos la transparencia, la justicia y la diversión en cada interacción, comprometidos con la satisfacción del jugador y la creación de un ambiente de juego responsable y seguro.`;
 ---
 
 <DefaultLayout>
 	<Hero client:load />
 	<Video client:visible />
 	<AboutUs 
-  title="Sobre Nosotros"
-  description="Somos un equipo dedicado y apasionado por crear experiencias emocionantes en juegos de azar."
-  visionTitle="Nuestra Visión"
-  vision="Ser líderes en ofrecer juegos de azar seguros, emocionantes y justos que entretengan y cautiven a jugadores en todo el mundo."
-  missionTitle="Nuestra Misión"
-  mission="Nuestra misión es desarrollar juegos de azar innovadores que combinen diversión con juego responsable, asegurando una experiencia agradable para todos."
-  valuesTitle="Nuestros Valores"
-  values="Valoramos la justicia, la satisfacción del jugador y el juego responsable como el núcleo de cada experiencia que ofrecemos."
-/>
+		title="Sobre Nosotros"
+		description={description}
+		visionTitle="Nuestra Visión"
+		vision={vision}
+		missionTitle="Nuestra Misión"
+		mission={mission}
+		valuesTitle="Nuestros Valores"
+		values={values}
+		largeText={aboutUS}
+	/>
 </DefaultLayout>

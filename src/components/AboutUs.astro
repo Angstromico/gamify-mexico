@@ -1,6 +1,7 @@
 ---
 import Section from './Section'
 import { bingo } from '@assets/index'
+import logo from '@assets/logo3.png'
 
 interface Props {
   title: string
@@ -11,9 +12,10 @@ interface Props {
   mission: string
   valuesTitle: string
   values: string
+  largeText: string
 }
 
-const { title, description, visionTitle, vision, missionTitle, mission, valuesTitle, values } = Astro.props
+const { title, description, visionTitle, vision, missionTitle, mission, valuesTitle, values, largeText } = Astro.props
 ---
 
 <div class="relative w-full h-[50vh] parallax-banner bg-cover bg-center" style={`background-image: url(${bingo.src});`}>
@@ -49,7 +51,20 @@ const { title, description, visionTitle, vision, missionTitle, mission, valuesTi
   </div>
 </Section>
 
-<style is:global>
+<!-- Logo and Text Section -->
+<Section id="logoTextSection" classes="container py-12 lg:py-20 relative w-full flex flex-col-reverse md:flex-row gap-3 items-center justify-between overflow-hidden">
+  <div class="text-container w-full md:w-[65%] text-center md:text-left">
+    <p class="body-2 text-xl text-justify md:text-2xl text-n-3 max-w-3xl mx-auto md:mx-0">
+      {largeText}
+    </p>
+  </div>
+
+  <div class="logo-container w-full md:w-[35%] md:right-0 transform translate-x-full opacity-0 transition-all duration-500 ease-out mb-16 md:mb-0">
+    <img src={logo.src} alt="Logo" class="w-full max-w-[320px] h-auto mx-auto" id="logoImage" />
+  </div>
+</Section>
+
+<style>
   .parallax-banner {
     background-attachment: fixed;
     background-size: cover;
@@ -59,4 +74,90 @@ const { title, description, visionTitle, vision, missionTitle, mission, valuesTi
   .text-shadow-lg {
     text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.6);
   }
+
+  .logo-container {
+    will-change: transform, opacity;
+  }
+
+  .show-logo {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+  }
+
+  .hide-logo {
+    transform: translateX(100%) !important;
+    opacity: 0 !important;
+  }
+
+  @media (max-width: 768px) {
+    .logo-container {
+      transform: translateY(100%);
+    }
+
+    .show-logo {
+      transform: translateY(0) !important;
+    }
+
+    .hide-logo {
+      transform: translateY(100%) !important;
+    }
+  }
 </style>
+
+<script>
+  // Parallax effect
+  const parallaxBanner = document.querySelector('.parallax-banner') as HTMLElement;
+
+  function updateParallax() {
+    const scrollPosition = window.pageYOffset;
+    if (parallaxBanner) {
+      parallaxBanner.style.backgroundPositionY = `${scrollPosition * 0.5}px`;
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateParallax);
+  });
+
+  // Logo animation
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show-logo');
+        entry.target.classList.remove('hide-logo');
+      } else {
+        entry.target.classList.add('hide-logo');
+        entry.target.classList.remove('show-logo');
+      }
+    });
+  }, observerOptions);
+
+  const logoContainer = document.querySelector('.logo-container') as HTMLElement;
+
+  // Apply initial state based on screen size
+  function setInitialLogoState() {
+    if (logoContainer) {
+      if (window.innerWidth <= 768) {
+        logoContainer.style.transform = 'translateY(100%)';
+      } else {
+        logoContainer.style.transform = 'translateX(100%)';
+      }
+      logoContainer.style.opacity = '0';
+    }
+  }
+
+  // Call setInitialLogoState on page load and resize
+  window.addEventListener('load', () => {
+    setInitialLogoState();
+    if (logoContainer) {
+      observer.observe(logoContainer);  // Start observing only after setting initial state
+    }
+  });
+  window.addEventListener('scroll', setInitialLogoState); 
+</script>
