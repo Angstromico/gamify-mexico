@@ -1,4 +1,8 @@
-# Astro Starter Kit: Minimal
+# Gamify Mexico
+
+![image](https://raw.githubusercontent.com/Angstromico/gamify-mexico/refs/heads/main/public/intro.png)
+
+## Astro Starter Kit: Minimal
 
 ```sh
 npm create astro@latest -- --template minimal
@@ -45,3 +49,5 @@ All commands are run from the root of the project, from a terminal:
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+
+## See the page here: [Gamify](https://gamify-mexico.netlify.app/)
