@@ -1,8 +1,11 @@
 ---
+// Import statements
 import Section from './Section'
+import LogoContainer from './LogoContainer'
 import { bingo } from '@assets/index'
-import logo from '@assets/logo3.png'
+import PSpanMexico from './PSpanMexico'
 
+// Interface for component props
 interface Props {
   title: string
   description: string
@@ -13,9 +16,19 @@ interface Props {
   valuesTitle: string
   values: string
   largeText: string
+  belowTitle: string
 }
 
-const { title, description, visionTitle, vision, missionTitle, mission, valuesTitle, values, largeText } = Astro.props
+// Extract props from Astro context
+const { title, description, visionTitle, vision, missionTitle, mission, valuesTitle, values, largeText, belowTitle } = Astro.props
+
+// Function to split a string into an array based on line breaks
+function splitTextToLines(text: string): string[] {
+  return text.split(/\r?\n/).filter(line => line.trim() !== "");
+}
+
+// Split largeText into lines
+const largeTextLines = splitTextToLines(largeText);
 ---
 
 <div class="relative w-full h-[50vh] parallax-banner bg-cover bg-center" style={`background-image: url(${bingo.src});`}>
@@ -52,19 +65,22 @@ const { title, description, visionTitle, vision, missionTitle, mission, valuesTi
 </Section>
 
 <!-- Logo and Text Section -->
-<Section id="logoTextSection" classes="container py-12 lg:py-20 relative w-full flex flex-col-reverse md:flex-row gap-3 items-center justify-between overflow-hidden">
-  <div class="text-container w-full md:w-[65%] text-center md:text-left">
-    <p class="body-2 text-xl text-justify md:text-2xl text-n-3 max-w-3xl mx-auto md:mx-0">
-      {largeText}
-    </p>
-  </div>
+<Section id="SectionText" classes="container py-16 lg:py-24 relative w-full overflow-hidden">
+  <div class="flex flex-col-reverse md:flex-row gap-12 items-center justify-between">
+    <div class="text-container w-full md:w-[65%] space-y-6">
+      <h2 class="h2 text-n-1 mb-6 font-bold text-gradient">{belowTitle} <!-- Highlight a little big more this title --></h2>
+      <div class="body-2 text-lg md:text-xl text-n-3 space-y-6 max-w-3xl">
+        {largeTextLines.map(line => (
+          <PSpanMexico line={line} />
+        ))}
+      </div>
+    </div>
 
-  <div class="logo-container w-full md:w-[35%] md:right-0 transform translate-x-full opacity-0 transition-all duration-500 ease-out mb-16 md:mb-0">
-    <img src={logo.src} alt="Logo" class="w-full max-w-[320px] h-auto mx-auto" id="logoImage" />
+     <LogoContainer client:load />
   </div>
 </Section>
 
-<style>
+<style is:global>
   .parallax-banner {
     background-attachment: fixed;
     background-size: cover;
@@ -102,6 +118,33 @@ const { title, description, visionTitle, vision, missionTitle, mission, valuesTi
       transform: translateY(100%) !important;
     }
   }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .text-container p {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .text-container p:nth-child(1) { animation-delay: 0.1s; }
+  .text-container p:nth-child(2) { animation-delay: 0.2s; }
+  .text-container p:nth-child(3) { animation-delay: 0.3s; }
+  /* Add more if needed */
+
+  .text-gradient {
+  background: linear-gradient(90deg, #00843d, #ffffff, #ef3340);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>
 
 <script>
@@ -119,45 +162,14 @@ const { title, description, visionTitle, vision, missionTitle, mission, valuesTi
     requestAnimationFrame(updateParallax);
   });
 
-  // Logo animation
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
+  // Text animation
+  const textObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('show-logo');
-        entry.target.classList.remove('hide-logo');
-      } else {
-        entry.target.classList.add('hide-logo');
-        entry.target.classList.remove('show-logo');
+        entry.target.style.animationPlayState = 'running';
       }
     });
   }, observerOptions);
 
-  const logoContainer = document.querySelector('.logo-container') as HTMLElement;
-
-  // Apply initial state based on screen size
-  function setInitialLogoState() {
-    if (logoContainer) {
-      if (window.innerWidth <= 768) {
-        logoContainer.style.transform = 'translateY(100%)';
-      } else {
-        logoContainer.style.transform = 'translateX(100%)';
-      }
-      logoContainer.style.opacity = '0';
-    }
-  }
-
-  // Call setInitialLogoState on page load and resize
-  window.addEventListener('load', () => {
-    setInitialLogoState();
-    if (logoContainer) {
-      observer.observe(logoContainer);  // Start observing only after setting initial state
-    }
-  });
-  window.addEventListener('scroll', setInitialLogoState); 
+  document.querySelectorAll('.text-container p').forEach(p => textObserver.observe(p));
 </script>

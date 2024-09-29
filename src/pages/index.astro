@@ -1,12 +1,15 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
 import { Hero, Video } from '@components/index'
-import AboutUs from "@components/AboutUs.astro"
+import AboutUs from "@components/AboutUs.astro";
 
 const aboutUS = `¡ HOLA ! Gracias por estar aqui.
+
 GamifyMéxico es una plataforma emergente de entretenimiento interactivo promocional y publicitario que busca fomentar tu participación en conexiones significativas. 
+
 Nuestro trabajo es acercar a empresas y marcas patrocinantes con nuestra vibrante comunidad ofreciendo experiencias reales y únicas; Siendo el streaming show nuestra principal herramienta.
 Muy orgullosos de la riqueza cultural y la pasión que distingue a nuestra tierra radicamos en el hermoso país de México. 
+
 ¡ Bienvenidos a GamifyMéxico el desafío interactivo que te recompensa !`
 
 const description = `En GamifyMéxico, somos un equipo apasionado que se dedica a crear experiencias emocionantes y únicas, conectando a empresas y marcas con nuestra vibrante comunidad. Nuestra misión es ofrecer un entorno seguro y entretenido para todos los participantes.`;
@@ -31,5 +34,6 @@ const values = `Valoramos la transparencia, la justicia y la diversión en cada 
 		valuesTitle="Nuestros Valores"
 		values={values}
 		largeText={aboutUS}
+    belowTitle="Nuestra Empresa"
 	/>
 </DefaultLayout>
