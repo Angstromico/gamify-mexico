@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
-import { Hero, Video } from '@components/index'
+import { Hero, Video, BingoComponent } from '@components/index'
 import AboutUs from "@components/AboutUs.astro"
 
 const aboutUs = `HELLO! Thank you for being here.
@@ -36,4 +36,5 @@ const values = `We value cultural richness, fairness, and player satisfaction, c
 		largeText={aboutUs}
     belowTitle="Our Company"
 	/>
+	<BingoComponent client:visible />
 </DefaultLayout>

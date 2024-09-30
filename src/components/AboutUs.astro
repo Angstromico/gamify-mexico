@@ -4,6 +4,7 @@ import Section from './Section'
 import LogoContainer from './LogoContainer'
 import { bingo } from '@assets/index'
 import PSpanMexico from './PSpanMexico'
+import { splitTextToLines } from 'src/utils'
 
 // Interface for component props
 interface Props {
@@ -21,11 +22,6 @@ interface Props {
 
 // Extract props from Astro context
 const { title, description, visionTitle, vision, missionTitle, mission, valuesTitle, values, largeText, belowTitle } = Astro.props
-
-// Function to split a string into an array based on line breaks
-function splitTextToLines(text: string): string[] {
-  return text.split(/\r?\n/).filter(line => line.trim() !== "");
-}
 
 // Split largeText into lines
 const largeTextLines = splitTextToLines(largeText);
@@ -169,7 +165,7 @@ const largeTextLines = splitTextToLines(largeText);
         entry.target.style.animationPlayState = 'running';
       }
     });
-  }, observerOptions);
+  });
 
   document.querySelectorAll('.text-container p').forEach(p => textObserver.observe(p));
 </script>

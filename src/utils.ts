@@ -4,3 +4,7 @@ export const translate = (es: string, en: string) => {
 
   return lang === 'es' ? es : en
 }
+
+export function splitTextToLines(text: string): string[] {
+  return text.split(/\r?\n/).filter((line) => line.trim() !== '')
+}
