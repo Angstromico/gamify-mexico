@@ -16,16 +16,13 @@ const Video = () => {
       classes='w-full my-6 mx-auto flex justify-center items-center flex-col px-3 mx-2 overflow-hidden'
     >
       <h2 className='h2 text-center font-bold mb-8'>
-        {t(
-          'La Experiencia Definitiva en Juego',
-          'The Ultimate Experience on Games'
-        )}
+        {t('Muro de Interes', 'Wall of Interest')}
       </h2>
       {isMounted && (
         <div className='w-full max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden'>
           <div className='relative pb-[56.25%]'>
             <ReactPlayer
-              url='https://www.youtube.com/watch?v=Uv5CiqSNf4k&ab_channel=ENFANTTERRIBLE'
+              url='https://youtu.be/l0ZNvhDdojQ?feature=shared'
               muted
               loop
               playing
