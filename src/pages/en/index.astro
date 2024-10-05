@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
-import { Hero, Video, BingoComponent } from '@components/index'
+import { Hero, Video, BingoComponent, Timer } from '@components/index'
 import AboutUs from "@components/AboutUs.astro"
 
 const aboutUs = `HELLO! Thank you for being here.
@@ -19,10 +19,16 @@ const vision = `Our vision is to be a leader in the interactive entertainment in
 const mission = `Our mission is to develop innovative platforms and experiences that promote responsible gaming, ensuring that every interaction is enjoyable and enriching for our community.`;
 
 const values = `We value cultural richness, fairness, and player satisfaction, committing ourselves to create experiences that respect responsible gaming and enhance community engagement.`;
+
+				// Get the current year dynamically
+    const currentYear = new Date().getFullYear()
+    // Set the target date to the last day of the current year
+    const target = new Date(`12/31/${currentYear} 23:59:59`)
 ---
 
 <DefaultLayout>
 	<Hero client:load />
+	<Timer client:visible target={target} />
 	<Video client:visible />
 	<AboutUs 
 		title="About Us"
