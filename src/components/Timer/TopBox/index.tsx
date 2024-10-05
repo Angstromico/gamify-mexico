@@ -7,8 +7,10 @@ import { topDealUsers } from '@constants/index'
 const TopBox = () => {
   const [openRanking, setOpenRanking] = useState(false)
   const t = useTranslation()
-  const topFive = topDealUsers.slice(0, 5)
-  const ranking = openRanking ? topDealUsers : topFive
+  const topFour = topDealUsers.slice(0, 4)
+  const topTwenty = topDealUsers.slice(0, 20)
+  const ranking = openRanking ? topTwenty : topFour
+  const totalUsers = topDealUsers.length < 20 ? topDealUsers.length : 20
 
   const toggleRanking = () => setOpenRanking(!openRanking)
 
@@ -38,8 +40,8 @@ const TopBox = () => {
       <div onClick={toggleRanking} className={classes.btnContainer}>
         <Button className='cursor-pointer'>
           {!openRanking
-            ? t('Ver todo el ranking', 'See all ranking')
-            : t('Ver primeros 5', 'See first five')}
+            ? t(`Ver primeros ${totalUsers}`, `See first ${totalUsers}`)
+            : t('Ver primeros 4', 'See first four')}
         </Button>
       </div>
     </div>
