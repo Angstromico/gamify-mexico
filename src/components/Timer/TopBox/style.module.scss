@@ -1,0 +1,37 @@
+.topBox {
+  h1 {
+    @apply mb-5;
+  }
+  .list {
+    .item {
+      @apply flex justify-between items-center mb-7;
+      .user {
+        @apply flex gap-5;
+        img {
+          @apply rounded-full w-10 h-10 object-cover;
+        }
+        .text {
+          @apply flex flex-col gap-1;
+          .name {
+            @apply text-sm font-medium;
+            .neonText {
+              @apply text-pink-500 font-bold text-base mr-1; /* Neon color */
+              text-shadow: 0 0 5px rgba(255, 20, 147, 0.8),
+                /* Soft glow */ 0 0 10px rgba(255, 20, 147, 0.6),
+                0 0 15px rgba(255, 20, 147, 0.4);
+            }
+          }
+          .email {
+            @apply text-xs;
+          }
+        }
+      }
+      .amount {
+        @apply font-medium;
+      }
+    }
+  }
+  .btnContainer {
+    @apply w-full flex justify-center items-center h-15 my-5;
+  }
+}

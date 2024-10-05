@@ -1,0 +1,31 @@
+.timer {
+  h2 {
+    @apply h2 text-center;
+  }
+  h3 {
+    @apply h3 text-center my-20;
+  }
+  .innerTimer {
+    @apply p-2 sm:p-4 md:p-6 border-2 border-n-1 rounded-md mx-auto w-[90%] max-w-[1000px] my-10 flex  justify-between;
+    background-color: rgba(139, 0, 0, 0.17);
+    .timerSegment {
+      @apply flex flex-col gap-2 text-center min-w-0;
+      .time {
+        @apply text-xl sm:text-4xl md:text-6xl lg:text-8xl;
+      }
+      .label {
+        @apply text-xs md:text-xl lg:text-3xl;
+      }
+    }
+    .divider,
+    .time {
+      @apply px-0 sm:px-2 md:px-6 lg:px-8 text-[4vw] sm:text-[3vw] md:text-6xl lg:text-8xl;
+    }
+    .divider {
+      @apply px-1 md:px-8;
+    }
+  }
+  .topBox {
+    @apply w-[80%] max-w-xl mx-auto rounded-md border border-n-2 p-2 md:p-3;
+  }
+}
