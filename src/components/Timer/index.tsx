@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTranslation } from '@hooks/useTranslations'
+import { currentLang } from '@store/*'
 import Section from '@components/Section'
 import classes from './style.module.scss'
 import TopBox from './TopBox'
@@ -45,24 +46,41 @@ const Timer = ({ target }: Props) => {
         ) : (
           <>
             <div className={classes.innerTimer}>
-              <div className={classes.timerSegment}>
+              <div className={classes.daySegment}>
+                {currentLang.get() === 'es' && (
+                  <div className={classes.label}>Faltan</div>
+                )}
                 <div className={classes.time}>{days}</div>
-                <div className={classes.label}>{t('Días', 'Days')}</div>
+                {currentLang.get() === 'es' ? (
+                  <div className={classes.label}>Días</div>
+                ) : (
+                  <>
+                    <div className={classes.label}>Days</div>
+                    <div className={classes.label}>Left</div>
+                  </>
+                )}
               </div>
-              <div className={classes.divider}>:</div>
-              <div className={classes.timerSegment}>
-                <div className={classes.time}>{hours}</div>
-                <div className={classes.label}>{t('Horas', 'Hours')}</div>
-              </div>
-              <div className={classes.divider}>:</div>
-              <div className={classes.timerSegment}>
-                <div className={classes.time}>{minutes}</div>
-                <div className={classes.label}>{t('Minutos', 'Minutes')}</div>
-              </div>
-              <div className={classes.divider}>:</div>
-              <div className={classes.timerSegment}>
-                <div className={classes.time}>{seconds}</div>
-                <div className={classes.label}>{t('Segundos', 'Seconds')}</div>
+              <div className={classes.timeSegments}>
+                {/* <div className={classes.divider}>:</div> */}
+                <div className={classes.timerSegment}>
+                  <div className={classes.time}>{hours}</div>
+                  <div className={classes.divider}>:</div>
+                  <div className={classes.label}>{t('Horas', 'Hours')}</div>
+                </div>
+                {/* <div className={classes.divider}>:</div> */}
+                <div className={classes.timerSegment}>
+                  <div className={classes.time}>{minutes}</div>
+                  <div className={classes.divider}>:</div>
+                  <div className={classes.label}>{t('Minutos', 'Minutes')}</div>
+                </div>
+                {/* <div className={classes.divider}>:</div> */}
+                <div className={classes.timerSegment}>
+                  <div className={classes.time}>{seconds}</div>
+                  <div className={classes.divider}>:</div>
+                  <div className={classes.label}>
+                    {t('Segundos', 'Seconds')}
+                  </div>
+                </div>
               </div>
             </div>
             <div className={classes.topBox}>

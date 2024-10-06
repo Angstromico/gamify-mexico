@@ -6,23 +6,38 @@
     @apply h3 text-center my-20;
   }
   .innerTimer {
-    @apply p-2 sm:p-4 md:p-6 border-2 border-n-1 rounded-md mx-auto w-[90%] max-w-[1000px] my-10 flex  justify-between;
-    background-color: rgba(139, 0, 0, 0.17);
-    .timerSegment {
-      @apply flex flex-col gap-2 text-center min-w-0;
+    @apply p-2 sm:p-4 md:p-6 rounded-md mx-auto w-[90%] max-w-[950px] my-10 flex  justify-center items-center;
+    .daySegment,
+    .timeSegments {
+      @apply h-44 md:h-60 lg:h-80;
+      background-color: rgba(139, 0, 0, 0.17);
+    }
+    .daySegment {
+      @apply flex flex-col text-center gap-3 items-center w-full justify-center mx-auto border-2 border-n-2 border-r my-auto rounded-tl-md rounded-bl-md;
       .time {
-        @apply text-xl sm:text-4xl md:text-6xl lg:text-8xl;
+        @apply text-2xl sm:text-5xl md:text-7xl lg:text-9xl;
       }
       .label {
-        @apply text-xs md:text-xl lg:text-3xl;
+        @apply text-lg md:text-3xl lg:text-5xl;
       }
     }
-    .divider,
-    .time {
-      @apply px-0 sm:px-2 md:px-6 lg:px-8 text-[4vw] sm:text-[3vw] md:text-6xl lg:text-8xl;
-    }
-    .divider {
-      @apply px-1 md:px-8;
+    .timeSegments {
+      @apply flex flex-col justify-center border-[3px] border-n-2 rounded-tr-md rounded-br-md;
+      .timerSegment {
+        @apply flex gap-2 text-center min-w-0 p-3 items-center w-full border-b-2 border-n-2;
+        &:last-of-type {
+          @apply border-b-0;
+        }
+        .time {
+          @apply text-lg sm:text-3xl md:text-5xl lg:text-6xl;
+        }
+        .label {
+          @apply text-sm sm:text-xl md:text-3xl lg:text-5xl;
+        }
+        .divider {
+          @apply px-1 sm:px-2 md:px-6 lg:px-8 text-[4vw] sm:text-[3vw] md:text-6xl mb-2;
+        }
+      }
     }
   }
   .topBox {
