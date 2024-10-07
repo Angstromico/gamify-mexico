@@ -3,4 +3,5 @@ export const siteInfo = {
   title: 'Gamify Mexico',
   description: 'Juega Bingo en tiempo real online',
   image: '/intro.png',
+  rights: 'Todos los derechos reservados',
 }

@@ -1,18 +1,27 @@
 ---
 import ViewTransitions from 'astro/components/ViewTransitions.astro'
 import { siteInfo } from '@globals/site-info'
-import  { Header, Footer } from '@components/index'
+import  { Header } from '@components/index'
 import { LangPicker, ButtonGradient } from '@components/index.astro'
 import logo from '@assets/logo3.png'
+import { Footer } from '@components/index.astro'
 
 interface Props {
  lang?: string 
  title?: string
  image?: string
  description?: string
+ rights?: string
 }
 
-const {lang = siteInfo.lang, title = siteInfo.title, image = siteInfo.image, description = siteInfo.description} = Astro.props
+// Rename the destructured variable to avoid conflict
+const {
+  lang = siteInfo.lang,
+  title = siteInfo.title,
+  image = siteInfo.image,
+  description = siteInfo.description,
+  rights = siteInfo.rights // Renamed this `rights` to avoid conflict
+} = Astro.props
 
 const siteUrl = Astro.url.href
 ---
@@ -46,7 +55,7 @@ const siteUrl = Astro.url.href
    <ButtonGradient />
    <LangPicker />
    <slot />
-   <Footer client:visible />
+   <Footer rights={rights} client:visible />
   </body>
 </html>
 
