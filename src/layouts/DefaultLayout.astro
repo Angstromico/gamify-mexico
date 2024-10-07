@@ -2,7 +2,8 @@
 import ViewTransitions from 'astro/components/ViewTransitions.astro'
 import { siteInfo } from '@globals/site-info'
 import  { Header, Footer } from '@components/index'
-import { LangPicker, ButtonGradient } from '@components/index.astro' 
+import { LangPicker, ButtonGradient } from '@components/index.astro'
+import logo from '@assets/logo3.png'
 
 interface Props {
  lang?: string 
@@ -23,7 +24,7 @@ const siteUrl = Astro.url.href
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content={Astro.generator} />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/svg+xml" href={logo.src} />
   <!-- Primary Meta Tags -->
   <title>{title}</title>
   <ViewTransitions />
