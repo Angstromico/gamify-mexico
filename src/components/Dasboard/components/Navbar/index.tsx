@@ -1,9 +1,8 @@
-import { useTranslation } from '@hooks/useTranslations'
+import { dynamicTranslate } from 'src/utils'
 import logo from '@assets/logo3.png'
 import classes from './style.module.scss'
-const Navbar = () => {
-  const t = useTranslation()
-
+import type { Lang } from '@interfaces/index'
+const Navbar = ({ lang }: { lang: Lang }) => {
   return (
     <div className={classes.navbar}>
       <div className={classes.logo}>
@@ -19,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className={classes.user}>
           <img src='/user.svg' alt='User Icon' />
-          <span>{t('Usuario', 'Username')}</span>
+          <span>{dynamicTranslate(lang, 'Usuario', 'Username')}</span>
         </div>
         <img src='/settings.svg' alt='Settings icon' className={classes.icon} />
       </div>

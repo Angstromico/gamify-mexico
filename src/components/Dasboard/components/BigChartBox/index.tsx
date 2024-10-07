@@ -1,4 +1,7 @@
 import { useTranslation } from '@hooks/useTranslations'
+import { dynamicTranslate } from 'src/utils'
+import type { Lang } from '@interfaces/index'
+
 import {
   Area,
   AreaChart,
@@ -47,13 +50,17 @@ const data = [
   },
 ]
 
-const BigChartBox = () => {
+const BigChartBox = ({ lang }: { lang: Lang }) => {
   const t = useTranslation()
 
   return (
     <div className={classes.bigChart}>
       <h1>
-        {t('Análisis de ganancias y pérdidas', 'Profit and Loss Analysis')}
+        {dynamicTranslate(
+          lang,
+          'Análisis de ganancias y pérdidas',
+          'Profit and Loss Analysis'
+        )}
       </h1>
       <div className={classes.chart}>
         <ResponsiveContainer width='99%' height='100%'>
@@ -75,7 +82,7 @@ const BigChartBox = () => {
               stackId='1'
               stroke='#82ca9d'
               fill='#82ca9d'
-              name={t('Ganancias', 'Profit')}
+              name={dynamicTranslate(lang, 'Ganancias', 'Profit')}
             />
             <Area
               type='monotone'
@@ -83,7 +90,7 @@ const BigChartBox = () => {
               stackId='1'
               stroke='#ff6b6b'
               fill='#ff6b6b'
-              name={t('Pérdidas', 'Loss')}
+              name={dynamicTranslate(lang, 'Pérdidas', 'Loss')}
             />
           </AreaChart>
         </ResponsiveContainer>

@@ -1,4 +1,4 @@
-import { useTranslation } from '@hooks/useTranslations'
+import type { Lang } from '@interfaces/index'
 import classes from './style.module.scss'
 import {
   TopBox,
@@ -16,37 +16,35 @@ import {
   barChartBoxVisit,
 } from '@constants/index'
 
-const Home = () => {
-  const t = useTranslation()
-
+const Home = ({ lang = 'es' }: { lang?: Lang }) => {
   return (
     <div className={classes.home}>
       <div className={`${classes.box} ${classes.box1}`}>
-        <TopBox />
+        <TopBox lang={lang} />
       </div>
       <div className={`${classes.box} ${classes.box2}`}>
-        <ChartBox {...chartBoxUser} />
+        <ChartBox lang={lang} {...chartBoxUser} />
       </div>
       <div className={`${classes.box} ${classes.box3}`}>
-        <ChartBox {...chartBoxProduct} />
+        <ChartBox lang={lang} {...chartBoxProduct} />
       </div>
       <div className={`${classes.box} ${classes.box4}`}>
-        <PieChartBox />
+        <PieChartBox lang={lang} />
       </div>
       <div className={`${classes.box} ${classes.box5}`}>
-        <ChartBox {...chartBoxRevenue} />
+        <ChartBox lang={lang} {...chartBoxRevenue} />
       </div>
       <div className={`${classes.box} ${classes.box6}`}>
-        <ChartBox {...chartBoxConversion} />
+        <ChartBox lang={lang} {...chartBoxConversion} />
       </div>
       <div className={`${classes.box} ${classes.box7}`}>
-        <BigChartBox />
+        <BigChartBox lang={lang} />
       </div>
       <div className={`${classes.box} ${classes.box8}`}>
-        <BarChartBox {...barChartBoxRevenue} />
+        <BarChartBox lang={lang} {...barChartBoxRevenue} />
       </div>
       <div className={`${classes.box} ${classes.box9}`}>
-        <BarChartBox {...barChartBoxVisit} />
+        <BarChartBox lang={lang} {...barChartBoxVisit} />
       </div>
     </div>
   )

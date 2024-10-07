@@ -1,6 +1,7 @@
-import { useTranslation } from '@hooks/useTranslations'
+import { dynamicTranslate } from 'src/utils'
 import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
 import classes from './style.module.scss'
+import type { Lang } from '@interfaces/index'
 
 const data = [
   { name: { es: 'Ganadas', en: 'Wins' }, value: 500, color: '#0088FE' },
@@ -8,12 +9,12 @@ const data = [
   { name: { es: 'Partidas', en: 'Games' }, value: 220, color: '#FFBB28' },
   { name: { es: 'Referidos', en: 'Referrals' }, value: 15, color: '#FF8042' },
 ]
-const PieChartBox = () => {
-  const t = useTranslation()
-
+const PieChartBox = ({ lang }: { lang: Lang }) => {
   return (
     <div className={classes.pieChart}>
-      <h1 className='h4'>{t('Historico de Juegos', 'Games History')}</h1>
+      <h1 className='h4'>
+        {dynamicTranslate(lang, 'Historico de Juegos', 'Games History')}
+      </h1>
       <div className={classes.chart}>
         <ResponsiveContainer width='99%' height={300}>
           <PieChart>
@@ -42,7 +43,7 @@ const PieChartBox = () => {
                 className={classes.dot}
                 style={{ backgroundColor: item.color }}
               />
-              <span>{t(item.name.es, item.name.en)}</span>
+              <span>{dynamicTranslate(lang, item.name.es, item.name.en)}</span>
             </div>
             <span>{item.value}</span>
           </div>

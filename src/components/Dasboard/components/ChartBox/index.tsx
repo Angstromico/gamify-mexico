@@ -1,6 +1,6 @@
 import { LineChart, Line, Tooltip, ResponsiveContainer } from 'recharts'
-import { useTranslation } from '@hooks/useTranslations'
-import type { LangText } from '@interfaces/index'
+import { dynamicTranslate } from 'src/utils'
+import type { LangText, Lang } from '@interfaces/index'
 import classes from './style.module.scss'
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
   color: string
   dataKey: string
   percentage: number
+  lang: Lang
 }
 
 const ChartBox = ({
@@ -21,19 +22,18 @@ const ChartBox = ({
   dataKey,
   color,
   percentage,
+  lang,
 }: Props) => {
-  const t = useTranslation()
-
   return (
     <div className={classes.chartBox}>
       <div className={classes.box}>
         <div className={classes.title}>
           <img src={icon} alt='User Chart' />
-          <span>{t(title.es, title.en)}</span>
+          <span>{dynamicTranslate(lang, title.es, title.en)}</span>
         </div>
         <h1>{number}</h1>
         <a style={{ color }} href='#'>
-          {t('Verlos todos', 'View all')}
+          {dynamicTranslate(lang, 'Verlos todos', 'View all')}
         </a>
       </div>
       <div className={classes.chart}>
@@ -63,7 +63,9 @@ const ChartBox = ({
           >
             {percentage}%
           </div>
-          <div className={classes.duration}>{t('Este mes', 'This month')}</div>
+          <div className={classes.duration}>
+            {dynamicTranslate(lang, 'Este mes', 'This month')}
+          </div>
         </div>
       </div>
     </div>

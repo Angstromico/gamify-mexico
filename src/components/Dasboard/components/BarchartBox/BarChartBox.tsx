@@ -1,6 +1,7 @@
 import { useTranslation } from '@hooks/useTranslations'
+import { dynamicTranslate } from 'src/utils'
 import { Bar, BarChart, ResponsiveContainer, Tooltip } from 'recharts'
-import type { LangText } from '@interfaces/index'
+import type { LangText, Lang } from '@interfaces/index'
 import classes from './BarChartBox.module.scss'
 
 type Props = {
@@ -8,14 +9,16 @@ type Props = {
   color: string
   dataKey: string
   chartData: object[]
+  lang: Lang
 }
 
 const BarChartBox = (props: Props) => {
+  const { lang } = props
   const t = useTranslation()
 
   return (
     <div className={classes.barChartBox}>
-      <h1>{t(props.title.es, props.title.en)}</h1>
+      <h1>{dynamicTranslate(lang, props.title.es, props.title.en)}</h1>
       <div className='chart'>
         <ResponsiveContainer width='99%' height={150}>
           <BarChart data={props.chartData}>
