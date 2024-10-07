@@ -1,7 +1,7 @@
 import { useTranslation } from '@hooks/useTranslations'
 import { Bar, BarChart, ResponsiveContainer, Tooltip } from 'recharts'
 import type { LangText } from '@interfaces/index'
-import './barChartBox.scss'
+import classes from './BarChartBox.module.scss'
 
 type Props = {
   title: LangText
@@ -14,7 +14,7 @@ const BarChartBox = (props: Props) => {
   const t = useTranslation()
 
   return (
-    <div className='barChartBox'>
+    <div className={classes.barChartBox}>
       <h1>{t(props.title.es, props.title.en)}</h1>
       <div className='chart'>
         <ResponsiveContainer width='99%' height={150}>
