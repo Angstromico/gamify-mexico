@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import Section from './Section'
 import ReactPlayer from 'react-player/youtube'
-import { useTranslation } from '@hooks/useTranslations'
-const Video = () => {
-  const t = useTranslation()
+import { dynamicTranslate } from 'src/utils'
+import type { Lang } from '@interfaces/index'
+
+interface Props {
+  lang?: Lang
+}
+const Video = ({ lang = 'es' }: Props) => {
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
@@ -16,7 +20,7 @@ const Video = () => {
       classes='w-full my-6 mx-auto flex justify-center items-center flex-col px-3 mx-2 overflow-hidden'
     >
       <h2 className='h2 text-center font-bold mb-8'>
-        {t('Muro de Interes', 'Wall of Interest')}
+        {dynamicTranslate(lang, 'Muro de Interes', 'Wall of Interest')}
       </h2>
       {isMounted && (
         <div className='w-full max-w-4xl mx-auto rounded-lg shadow-2xl overflow-hidden'>
