@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import classes from './style.module.scss'
-import { useTranslation } from '@hooks/useTranslations'
+import { dynamicTranslate } from 'src/utils'
 import Button from '@components/Button'
 import { topDealUsers } from '@constants/index'
+import type { Lang } from '@interfaces/index'
 
-const TopBox = () => {
+const TopBox = ({ lang }: { lang: Lang }) => {
   const [openRanking, setOpenRanking] = useState(false)
-  const t = useTranslation()
   const topFour = topDealUsers.slice(0, 4)
   const topTwenty = topDealUsers.slice(0, 20)
   const ranking = openRanking ? topTwenty : topFour
@@ -16,7 +16,7 @@ const TopBox = () => {
 
   return (
     <div className={classes.topBox}>
-      <h1>{t('Top Jugadores', 'Top Players')}</h1>
+      <h1>{dynamicTranslate(lang, 'Top Jugadores', 'Top Players')}</h1>
       <ul className={classes.list}>
         {ranking.map((user) => {
           const { id, img, username, amount, email } = user
@@ -40,8 +40,12 @@ const TopBox = () => {
       <div onClick={toggleRanking} className={classes.btnContainer}>
         <Button className='cursor-pointer'>
           {!openRanking
-            ? t(`Ver primeros ${totalUsers}`, `See first ${totalUsers}`)
-            : t('Ver primeros 4', 'See first four')}
+            ? dynamicTranslate(
+                lang,
+                `Ver primeros ${totalUsers}`,
+                `See first ${totalUsers}`
+              )
+            : dynamicTranslate(lang, 'Ver primeros 4', 'See first four')}
         </Button>
       </div>
     </div>

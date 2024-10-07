@@ -1,21 +1,21 @@
 import { useState, useEffect } from 'react'
-import { useTranslation } from '@hooks/useTranslations'
-import { currentLang } from '@store/*'
+import { dynamicTranslate } from 'src/utils'
 import Section from '@components/Section'
 import classes from './style.module.scss'
 import TopBox from './TopBox'
+import type { Lang } from '@interfaces/index'
 
 interface Props {
   target: Date
+  lang?: Lang
 }
 
-const Timer = ({ target }: Props) => {
+const Timer = ({ target, lang = 'es' }: Props) => {
   const [missionAccomplished, setMissionAccomplished] = useState(false)
   const [days, setDays] = useState(0)
   const [hours, setHours] = useState(0)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
-  const t = useTranslation()
 
   useEffect(() => {
     const intervale = setInterval(() => {
@@ -37,21 +37,29 @@ const Timer = ({ target }: Props) => {
     return () => clearInterval(intervale)
   }, [])
 
+  const isEs = lang === 'es'
+
   return (
     <Section id='timer'>
       <div className={classes.timer}>
-        <h2>{t('Top Jugadores de Temporada', 'Top Season Players')}</h2>
+        <h2>
+          {dynamicTranslate(
+            lang,
+            'Top Jugadores de Temporada',
+            'Top Season Players'
+          )}
+        </h2>
         {missionAccomplished ? (
-          <h3>{t('Contienda Finalizada', 'Contest Ended')}</h3>
+          <h3>
+            {dynamicTranslate(lang, 'Contienda Finalizada', 'Contest Ended')}
+          </h3>
         ) : (
           <>
             <div className={classes.innerTimer}>
               <div className={classes.daySegment}>
-                {currentLang.get() === 'es' && (
-                  <div className={classes.label}>Faltan</div>
-                )}
+                {isEs && <div className={classes.label}>Faltan</div>}
                 <div className={classes.time}>{days}</div>
-                {currentLang.get() === 'es' ? (
+                {isEs ? (
                   <div className={classes.label}>Días</div>
                 ) : (
                   <>
@@ -61,30 +69,33 @@ const Timer = ({ target }: Props) => {
                 )}
               </div>
               <div className={classes.timeSegments}>
-                {/* <div className={classes.divider}>:</div> */}
                 <div className={classes.timerSegment}>
                   <div className={classes.time}>{hours}</div>
                   <div className={classes.divider}>:</div>
-                  <div className={classes.label}>{t('Horas', 'Hours')}</div>
+                  <div className={classes.label}>
+                    {dynamicTranslate(lang, 'Horas', 'Hours')}
+                  </div>
                 </div>
-                {/* <div className={classes.divider}>:</div> */}
+
                 <div className={classes.timerSegment}>
                   <div className={classes.time}>{minutes}</div>
                   <div className={classes.divider}>:</div>
-                  <div className={classes.label}>{t('Minutos', 'Minutes')}</div>
+                  <div className={classes.label}>
+                    {dynamicTranslate(lang, 'Minutos', 'Minutes')}
+                  </div>
                 </div>
-                {/* <div className={classes.divider}>:</div> */}
+
                 <div className={classes.timerSegment}>
                   <div className={classes.time}>{seconds}</div>
                   <div className={classes.divider}>:</div>
                   <div className={classes.label}>
-                    {t('Segundos', 'Seconds')}
+                    {dynamicTranslate(lang, 'Segundos', 'Seconds')}
                   </div>
                 </div>
               </div>
             </div>
             <div className={classes.topBox}>
-              <TopBox />
+              <TopBox lang={lang} />
             </div>
           </>
         )}
