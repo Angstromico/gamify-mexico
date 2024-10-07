@@ -1,0 +1,28 @@
+.chartBox {
+  @apply flex h-full;
+  .box {
+    @apply flex flex-col justify-between;
+    flex: 2;
+    .title {
+      @apply flex items-center gap-2;
+      img {
+      }
+    }
+  }
+  .chart {
+    @apply flex flex-col justify-between;
+    flex: 3;
+    .main {
+      @apply h-full w-full;
+    }
+    .text {
+      @apply text-right flex flex-col;
+      .percentage {
+        @apply font-bold text-xl;
+      }
+      .duration {
+        @apply text-sm;
+      }
+    }
+  }
+}

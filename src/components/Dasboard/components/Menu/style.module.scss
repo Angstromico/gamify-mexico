@@ -1,0 +1,14 @@
+.menu {
+  .item {
+    @apply flex flex-col gap-3 mb-5 font-extralight;
+    .title {
+      @apply text-sm text-color-soft capitalize;
+    }
+    .listItem {
+      @apply flex items-center gap-2 p-2 rounded-md;
+      &:hover {
+        @apply bg-color-softBg;
+      }
+    }
+  }
+}

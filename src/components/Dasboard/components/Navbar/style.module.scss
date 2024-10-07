@@ -1,0 +1,34 @@
+.flexCenter {
+  @apply flex items-center;
+}
+
+.navbar {
+  @apply w-full p-5 justify-between;
+  @extend .flexCenter;
+  .logo {
+    @extend .flexCenter;
+    img {
+      @apply max-w-32;
+    }
+  }
+  .icons {
+    @apply gap-2;
+    @extend .flexCenter;
+    .notification {
+      @apply relative;
+      span {
+        @apply absolute bg-red-600 rounded-full w-4 h-4 justify-center -top-2 -right-2 text-xs font-bold;
+        @extend .flexCenter;
+      }
+    }
+    .user {
+      @apply gap-2;
+      @extend .flexCenter;
+      img {
+        @apply w-6 h-6 rounded-[50%] object-cover;
+      }
+    }
+    .icon {
+    }
+  }
+}

@@ -14,6 +14,11 @@ export default {
           4: '#7ADB78',
           5: '#858DFF',
           6: '#FF98E2',
+          soft: '#ddd',
+          dark: '#2a3447',
+          mainBg: '#2a3447',
+          softBg: '#384256',
+          darkBg: '#222b3c',
         },
         stroke: {
           1: '#26242C',
@@ -33,6 +38,9 @@ export default {
           12: '#2E2A41',
           13: '#6C7275',
         },
+      },
+      gridAutoRows: {
+        'min-180': 'minmax(180px, auto)',
       },
       fontFamily: {
         sans: ['var(--font-sora)', ...fontFamily.sans],

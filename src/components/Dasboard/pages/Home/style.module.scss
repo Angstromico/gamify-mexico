@@ -1,0 +1,16 @@
+.home {
+  @apply grid gap-5 grid-flow-dense md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 auto-rows-min-180 w-full;
+  @media only screen and (min-width: 640px) {
+    grid-auto-rows: minmax(120px, auto);
+  }
+  .box {
+    @apply p-5 rounded-lg border-2 border-color-softBg bg-slate-600 w-full;
+  }
+  .box1,
+  .box4 {
+    @apply col-span-1 md:row-span-3;
+  }
+  .box7 {
+    @apply md:col-span-2 md:row-span-2;
+  }
+}

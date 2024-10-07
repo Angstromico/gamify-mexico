@@ -40,7 +40,9 @@ const Hero = () => {
           <p className='body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8'>
             {t('Disfruta el juego', 'Enjoy the game')}
           </p>
-          <Button link='/dashboard'>{t('Comenzar', 'Get Started')}</Button>
+          <Button link={t('/dashboard', '/en/dashboard')}>
+            {t('Comenzar', 'Get Started')}
+          </Button>
         </div>
         <div className='max-w-96 mx-auto relative md:max-w-5xl xl:mb-24'>
           <div className='relative z-1 p-0.5 rounded-2xl bg-conic-gradient'>
@@ -82,13 +84,6 @@ const Hero = () => {
             <Gradient />
           </div>
           <div className='absolute w-full -top-[54%] left-1/2 -translate-x-1/2 md:-top-[46%] md:w-[136%] lg:-top-[104%] 3xl:ml-8'>
-            {/* <img
-              className='w-full opacity-20 '
-              src={neon.src}
-              alt='Hero'
-              height={1024}
-              width={1800}
-            /> */}
             <div
               className='w-full h-auto bg-center bg-no-repeat bg-cover rounded-b-2xl'
               style={{

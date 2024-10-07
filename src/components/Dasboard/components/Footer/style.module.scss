@@ -1,0 +1,11 @@
+.footer {
+  @apply flex items-center justify-between p-7 font-bold;
+  span {
+    &:first-child {
+      @apply text-lg;
+    }
+    &:last-child {
+      @apply text-sm;
+    }
+  }
+}

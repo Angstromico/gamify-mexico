@@ -1,0 +1,28 @@
+.topBox {
+  h1 {
+    @apply mb-5;
+  }
+  .list {
+    .item {
+      @apply flex justify-between items-center mb-7;
+      .user {
+        @apply flex gap-5;
+        img {
+          @apply rounded-full w-10 h-10 object-cover;
+        }
+        .text {
+          @apply flex flex-col gap-1;
+          .name {
+            @apply text-sm font-medium;
+          }
+          .email {
+            @apply text-xs;
+          }
+        }
+      }
+      .amount {
+        @apply font-medium;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.bigChart {
+  @apply w-full h-full flex flex-col justify-between;
+  h1 {
+    @apply h3;
+  }
+  .chart {
+    @apply w-full h-72;
+  }
+}
