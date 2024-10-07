@@ -1,6 +1,5 @@
 import { useRef } from 'react'
 import Section from './Section'
-import { useTranslation } from '@hooks/useTranslations'
 import { curve, pingball, space } from '../assets'
 import Button from './Button'
 import { BackgroundCircles, BottomLine, Gradient } from './design/Hero'
@@ -10,9 +9,28 @@ import Generating from './design/Generating'
 import Notification from './design/Notification'
 import Logos from './design/Logos'
 
-const Hero = () => {
+interface Props {
+  title?: string
+  subtitle?: string
+  startBtn?: string
+  btnLink?: string
+  number?: string
+  loadingtext?: string
+  numberIs?: string
+  fortuneText?: string
+}
+
+const Hero = ({
+  title = 'Explora las posibilidades',
+  subtitle = 'Disfruta el juego',
+  startBtn = 'Comenzar',
+  btnLink = '/dashboard',
+  number = 'Numero actual',
+  loadingtext = 'Cargando',
+  numberIs = 'El numero es: ',
+  fortuneText = 'La Fortuna Favorece a los Valientes',
+}: Props) => {
   const parallaxRef = useRef(null)
-  const t = useTranslation()
 
   return (
     <Section
@@ -25,7 +43,7 @@ const Hero = () => {
       <div className='container relative w-full' ref={parallaxRef}>
         <div className='w-full max-w-6xl relative z-1 text-center mb-16 md:mb-20 lg:mb-24'>
           <h1 className='h1 mb-6 3xl:ml-32'>
-            {t('Explora las posibilidades', 'Explore the Possibilities')}
+            {title}
             <span className='inline-block relative'>
               Gamify Mexico
               <img
@@ -38,11 +56,9 @@ const Hero = () => {
             </span>
           </h1>
           <p className='body-1 max-w-3xl mx-auto mb-6 text-n-2 lg:mb-8'>
-            {t('Disfruta el juego', 'Enjoy the game')}
+            {subtitle}
           </p>
-          <Button link={t('/dashboard', '/en/dashboard')}>
-            {t('Comenzar', 'Get Started')}
-          </Button>
+          <Button link={btnLink}>{startBtn}</Button>
         </div>
         <div className='max-w-96 mx-auto relative md:max-w-5xl xl:mb-24'>
           <div className='relative z-1 p-0.5 rounded-2xl bg-conic-gradient'>
@@ -56,7 +72,10 @@ const Hero = () => {
                   height={1024}
                   width={490}
                 />
-                <Generating classes='absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto md:bottom-8 md:w-[31rem] md:-translate-x-1/2' />
+                <Generating
+                  loadingText={loadingtext}
+                  classes='absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto md:bottom-8 md:w-[31rem] md:-translate-x-1/2'
+                />
                 <ScrollParallax isAbsolutelyPositioned>
                   <ul className='hidden absolute -left-24 bottom-28 p-1 bg-n-9/40 backdrop-blur border border-n-1/10 rounded-2xl xl:flex'>
                     {heroIcons.map((icon, i) => {
@@ -64,7 +83,7 @@ const Hero = () => {
                         <li className='p-5' key={i}>
                           <img
                             src={icon.src}
-                            alt={t('Algun icono', 'Some icon')}
+                            alt='Icon'
                             width={24}
                             height={25}
                           />
@@ -76,7 +95,8 @@ const Hero = () => {
                 <ScrollParallax isAbsolutelyPositioned>
                   <Notification
                     classes='hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] lg:flex'
-                    title={t('Numero actual', 'Current number')}
+                    title={number}
+                    numberIs={numberIs}
                   />
                 </ScrollParallax>
               </div>
@@ -97,7 +117,10 @@ const Hero = () => {
           </div>
           <BackgroundCircles parallaxRef={parallaxRef} />
         </div>
-        <Logos classes='hidden relative z-10 mt-20 lg:block' />
+        <Logos
+          title={fortuneText}
+          classes='hidden relative z-10 mt-20 lg:block'
+        />
       </div>
       <BottomLine />
     </Section>

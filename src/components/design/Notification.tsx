@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
-import { useTranslation } from '@hooks/useTranslations'
 
 interface Props {
   classes?: string
   title: string
+  numberIs: string
 }
-const Notification = ({ classes, title }: Props) => {
+const Notification = ({ classes, title, numberIs }: Props) => {
   const [currentNumber, setCurrentNumber] = useState<string>('00')
-  const t = useTranslation()
 
   useEffect(() => {
     const generateRandomNumber = () => {
@@ -39,10 +38,7 @@ const Notification = ({ classes, title }: Props) => {
         <h6 className='mb-1 font-semibold text-base'>{title}</h6>
         <div className='flex items-center justify-between'>
           <h4 className='text-xl text-center text-yellow-500 font-black ml-10'>
-            {t(
-              `El número es: ${currentNumber}`,
-              `The number is: ${currentNumber}`
-            )}
+            {`${numberIs} ${currentNumber}`}
           </h4>
         </div>
       </div>

@@ -1,12 +1,10 @@
 import { loading } from '@assets/index'
-import { useTranslation } from '@hooks/useTranslations'
 
 interface Props {
   classes?: string
+  loadingText: string
 }
-const Generating = ({ classes }: Props) => {
-  const t = useTranslation()
-
+const Generating = ({ classes, loadingText }: Props) => {
   return (
     <div
       className={`flex items-center h-14 px-6 bg-n-8/80 rounded-3xl ${
@@ -16,9 +14,9 @@ const Generating = ({ classes }: Props) => {
       <img
         className='w-5 h-5 mr-4 animate-spin'
         src={loading.src}
-        alt={t('Cargando', 'Loading')}
+        alt={loadingText}
       />
-      {t('Manda comentarios...', 'Send comments')}
+      {loadingText}
     </div>
   )
 }

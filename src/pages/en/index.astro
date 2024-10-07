@@ -24,10 +24,21 @@ const values = `We value cultural richness, fairness, and player satisfaction, c
     const currentYear = new Date().getFullYear()
     // Set the target date to the last day of the current year
     const target = new Date(`12/31/${currentYear} 23:59:59`)
+
+ const heroText = {
+		title: 'Explore the Possibilities',
+		subtitle: 'Enjoy the Game',
+		startBtn: 'Get Started',
+		btnLink: '/en/dashboard',
+		number: 'Current number', 
+		loadingtext: 'Loading',
+		numberIs: 'The number is: ',
+		fortuneText: 'Fortune Favors the Bold'
+	}
 ---
 
 <DefaultLayout rights="All rights reserved" image="/introEn.png" description="Play Bingo in real time online">
-	<Hero client:load />
+	<Hero {...heroText} client:load />
 	<Timer client:load target={target} />
 	<Video client:visible />
 	<AboutUs 
