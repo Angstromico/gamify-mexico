@@ -2,9 +2,8 @@
 import ViewTransitions from 'astro/components/ViewTransitions.astro'
 import { siteInfo } from '@globals/site-info'
 import { LangPicker } from '@components/index.astro'
-import { Navbar, Menu } from '@components/Dasboard/components'
+import { Navbar, Menu, Footer } from '@components/Dasboard/components'
 import logo from '@assets/logo3.png' 
-import {Footer} from '@components/index.astro'
 
 interface Props {
  lang?: string 
@@ -56,7 +55,7 @@ const siteUrl = Astro.url.href
           <slot />
         </div>
       </div>
-      <Footer rights={rights} />
+      <Footer />
     </main>
   </body>
 </html>
