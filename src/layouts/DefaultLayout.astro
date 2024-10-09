@@ -12,6 +12,7 @@ interface Props {
  image?: string
  description?: string
  rights?: string
+ noWrapper?: boolean
 }
 
 // Rename the destructured variable to avoid conflict
@@ -20,7 +21,8 @@ const {
   title = siteInfo.title,
   image = siteInfo.image,
   description = siteInfo.description,
-  rights = siteInfo.rights // Renamed this `rights` to avoid conflict
+  rights = siteInfo.rights, // Renamed this `rights` to avoid conflict
+  noWrapper
 } = Astro.props
 
 const siteUrl = Astro.url.href
@@ -51,11 +53,11 @@ const siteUrl = Astro.url.href
   <meta name="og:image" content={image} />
   </head>
   <body>
-   <Header client:load />
+   {!noWrapper && <Header client:load />}
    <ButtonGradient />
    <LangPicker />
    <slot />
-   <Footer rights={rights} />
+   {!noWrapper && <Footer rights={rights} />}
   </body>
 </html>
 
@@ -155,5 +157,18 @@ body {
 
 .animate-fadeOut {
   animation: fadeOut 0.5s forwards; /* Fades out over 0.5s and stays hidden */
+}
+@tailwind utilities;
+/* Add the following code */
+@layer utilities {
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+/* Hide scrollbar for IE, Edge, and Firefox */
+.no-scrollbar {
+-ms-overflow-style: none; /* IE and Edge */
+scrollbar-width: none; /* Firefox */
+}
 }
 </style>

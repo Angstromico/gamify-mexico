@@ -92,9 +92,9 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
   }
 
   return (
-    <div className='relative w-screen h-screen bg-darkBg flex items-center justify-center'>
+    <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center'>
       {/* Video with live chat and viewer count */}
-      <div className='relative w-[90vw] h-[80vh] max-w-[400px]'>
+      <div className='relative w-screen h-screen md:h-[80vh] max-w-[400px]'>
         <ReactPlayer
           url='https://www.youtube.com/embed/-gEFDcfyyMg?autoplay=1&rel=0&showinfo=0&controls=0&modestbranding=0'
           width='100%'
@@ -113,11 +113,11 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
 
         {/* Live comments section */}
         <div
-          className='absolute top-20 left-0 right-0 flex flex-col space-y-2 px-4 bg-black bg-opacity-50 w-[90%] rounded-md mx-auto h-40 overflow-y-auto max-h-40'
+          className='absolute bottom-[45%] left-0 right-0 flex flex-col space-y-2 px-4  w-[90%] rounded-md mx-auto h-20 md:h-24 overflow-y-auto no-scrollbar'
           ref={commentsRef}
         >
           {comments.length === 0 ? (
-            <div className='text-gray-400 text-center'>
+            <div className='text-gray-100 text-center'>
               {dynamicTranslate(
                 lang,
                 'No hay comentarios todavía',
@@ -132,25 +132,16 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
                   alt='User avatar'
                   className='w-8 h-8 rounded-full'
                 />
-                <div className='bg-gray-700 p-2 rounded-lg shadow-md flex-1'>
-                  <span className='text-blue-500 font-semibold'>
-                    {dynamicTranslate(lang, 'Usuario', 'User')}
-                  </span>
-                  <p className='text-white'>
-                    {dynamicTranslate(lang, comment.es, comment.en)}
-                  </p>
-                  <span className='text-xs text-gray-400'>
-                    {dynamicTranslate(lang, 'Justo ahora', 'Just now')}
-                  </span>{' '}
-                  {/* You can later add real timestamps */}
-                </div>
+                <p className='text-white'>
+                  {dynamicTranslate(lang, comment.es, comment.en)}
+                </p>
               </div>
             ))
           )}
         </div>
 
         {/* Input for adding a new comment */}
-        <div className='absolute top-[33%] left-0 right-0 px-4 flex items-center space-x-2'>
+        <div className='absolute bottom-0 left-0 right-0 px-4 flex items-center space-x-2 mb-1'>
           <input
             type='text'
             className='flex-grow p-2 rounded-full border border-gray-400 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -168,10 +159,10 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
             }}
           />
           <button
-            className='bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition'
+            className='bg-blue-500 text-white px-4 py-3 rounded-full hover:bg-blue-600 transition'
             onClick={handleAddComment}
           >
-            {dynamicTranslate(lang, 'Agregar', 'Post')}
+            <img className='w-5' src='/send.png' alt='Arrow' />
           </button>
         </div>
 
@@ -203,15 +194,15 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
                 />
               </div>
             )}
-            <h3 className='text-xl text-red-500 text-center font-black my-4'>
+            <h3 className='text-xl text-red-500 text-center font-black my-2'>
               {dynamicTranslate(lang, 'Tarjetas:', 'Cards:')}
             </h3>
             {/* Display 4 bingo cards for selection */}
-            <div className='grid grid-cols-4 gap-1 mt-4'>
+            <div className='grid grid-cols-4 gap-1 mb-2 w-full md:w-[80%] mx-auto'>
               {cards.map((card, idx) => (
                 <div
                   key={idx}
-                  className='text-white p-2 md:p-4 m-2 rounded-lg shadow-lg cursor-pointer bg-color-4 hover:bg-color-5 transition'
+                  className='text-white text-sm p-2 m-2 rounded-lg shadow-lg cursor-pointer bg-color-4 hover:bg-color-5 transition mb-4'
                   onClick={() => handleSelectCard(card)}
                 >
                   {idx + 1}
@@ -222,12 +213,14 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
 
           {/* Drawn balls section (30% width) */}
           <div className='flex flex-col items-center w-[30%]'>
-            <div className='text-white text-lg mb-2'>Drawn Balls</div>
+            <div className='text-yellow-600 font-bold text-xl mb-2'>
+              {dynamicTranslate(lang, 'Bolas Extraídas', 'Drawn Balls')}
+            </div>
             <div className='flex flex-col flex-wrap justify-center mt-2'>
               {drawnBalls.map((ball, idx) => (
                 <div
                   key={idx}
-                  className={`h-8 w-8 md:w-12 md:h-12 rounded-full bg-yellow-500 hover:bg-yellow-700 hover:text-n-1 text-slate-500 font-bold flex items-center justify-center mx-2 mb-2 cursor-pointer transition-colors ${
+                  className={`h-7 w-7 text-sm md:w-9 md:h-9 rounded-full bg-yellow-500 hover:bg-yellow-700 hover:text-n-1 text-slate-500 font-bold flex items-center justify-center mx-2 mb-2 cursor-pointer transition-colors ${
                     markedNumbers.has(ball) ? 'bg-green-500' : ''
                   } ${fadeOutBalls.has(ball) ? 'animate-fadeOut' : ''}`}
                   onClick={() => handleMarkNumber(ball)}
