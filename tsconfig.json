@@ -3,6 +3,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
+    "lib": ["es2016", "dom"],
     "baseUrl": ".",
     "paths": {
       "@components/*": ["./src/components/*"],

@@ -70,6 +70,14 @@ export const navigation = [
     link: '/login',
     onlyMobile: true,
   },
+  {
+    id: '6',
+    title: 'Bingo',
+    titulo: 'Bingo',
+    url: '/en/bingo',
+    link: '/bingo',
+    onlyMobile: false,
+  },
 ]
 
 export const heroIcons = [homeSmile, file02, searchMd, plusSquare]
@@ -443,4 +451,27 @@ export const barChartBoxVisit = {
       visit: 3490,
     },
   ],
+}
+
+export const generateBingoCard = (): number[] => {
+  const getRandomNumbers = (count: number): number[] => {
+    const numbers = new Set<number>()
+    while (numbers.size < count) {
+      numbers.add(Math.floor(Math.random() * 99) + 1)
+    }
+    return Array.from(numbers)
+  }
+
+  const bingoCard = [
+    ...getRandomNumbers(5), // Column 1
+    ...getRandomNumbers(5), // Column 2
+    ...getRandomNumbers(4), // Column 3 (excluding middle space)
+    ...getRandomNumbers(5), // Column 4
+    ...getRandomNumbers(5), // Column 5
+  ]
+
+  // Insert the free space (0) in the middle (12th position for a 5x5 grid)
+  bingoCard.splice(12, 0, 0)
+
+  return bingoCard
 }

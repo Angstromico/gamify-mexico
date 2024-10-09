@@ -113,6 +113,10 @@ export default {
       screens: {
         '3xl': '1700px ',
       },
+      gridTemplateColumns: {
+        // Simple 5 column grid
+        5: 'repeat(5, minmax(0, 1fr))',
+      },
     },
   },
   plugins: [

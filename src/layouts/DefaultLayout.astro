@@ -144,5 +144,16 @@ body {
   @apply rotate-[-360deg];
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
 
+.animate-fadeOut {
+  animation: fadeOut 0.5s forwards; /* Fades out over 0.5s and stays hidden */
+}
 </style>
