@@ -24,7 +24,7 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
     const interval = setInterval(() => {
       const newBall = Math.floor(Math.random() * 75) + 1
       setDrawnBalls((prev) =>
-        prev.length >= 4 ? [...prev.slice(1), newBall] : [...prev, newBall]
+        prev.length >= 3 ? [...prev.slice(1), newBall] : [...prev, newBall]
       )
     }, 10000)
 
