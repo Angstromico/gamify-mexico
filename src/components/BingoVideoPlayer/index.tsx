@@ -6,6 +6,7 @@ import type { Lang } from '@interfaces/index'
 import BingoCard from './BingoCard'
 
 const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
+  const [isMounted, setIsMounted] = useState(false)
   const [cards, setCards] = useState<number[][]>([])
   const [selectedCard, setSelectedCard] = useState<number[] | null>(null)
   const [liveViewers, setLiveViewers] = useState<number>(100)
@@ -18,6 +19,10 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
   const [newComment, setNewComment] = useState<string>('')
 
   const commentsRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   // Simulate adding a new ball every minute
   useEffect(() => {
@@ -95,15 +100,17 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
     <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center'>
       {/* Video with live chat and viewer count */}
       <div className='relative w-screen h-screen md:h-[80vh] max-w-[400px]'>
-        <ReactPlayer
-          url='https://www.youtube.com/embed/-gEFDcfyyMg?autoplay=1&rel=0&showinfo=0&controls=0&modestbranding=0'
-          width='100%'
-          height='100%'
-          playing
-          loop
-          className='rounded-xl overflow-hidden'
-          style={{ objectFit: 'cover' }}
-        />
+        {isMounted && (
+          <ReactPlayer
+            url='https://www.youtube.com/embed/-gEFDcfyyMg?autoplay=1&rel=0&showinfo=0&controls=0&modestbranding=0'
+            width='100%'
+            height='100%'
+            playing
+            loop
+            className='rounded-xl overflow-hidden'
+            style={{ objectFit: 'cover' }}
+          />
+        )}
 
         {/* Viewer count */}
         <div className='absolute top-2 right-2 flex items-center bg-gray-700 bg-opacity-60 p-1 rounded'>
