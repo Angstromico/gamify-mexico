@@ -8,6 +8,7 @@ import { ScrollParallax } from 'react-just-parallax'
 import Generating from './design/Generating'
 import Notification from './design/Notification'
 import Logos from './design/Logos'
+import type { Lang } from '@interfaces/index'
 
 interface Props {
   title?: string
@@ -18,6 +19,7 @@ interface Props {
   loadingtext?: string
   numberIs?: string
   fortuneText?: string
+  lang?: Lang
 }
 
 const Hero = ({
@@ -29,6 +31,7 @@ const Hero = ({
   loadingtext = 'Cargando',
   numberIs = 'El numero es: ',
   fortuneText = 'La Fortuna Favorece a los Valientes',
+  lang = 'es',
 }: Props) => {
   const parallaxRef = useRef(null)
 
@@ -74,8 +77,10 @@ const Hero = ({
                 />
                 <Generating
                   loadingText={loadingtext}
-                  classes='absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto md:bottom-8 md:w-[31rem] md:-translate-x-1/2'
+                  classes='absolute left-4 right-4 bottom-5 md:left-1/2 md:right-auto md:bottom-8 md:w-[31rem] md:-translate-x-1/2 z-10'
+                  lang={lang}
                 />
+                {/* I still can;t click the input and write, this is the place I use the component */}
                 <ScrollParallax isAbsolutelyPositioned>
                   <ul className='hidden absolute -left-24 bottom-28 p-1 bg-n-9/40 backdrop-blur border border-n-1/10 rounded-2xl xl:flex'>
                     {heroIcons.map((icon, i) => {
