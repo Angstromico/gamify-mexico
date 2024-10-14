@@ -13,6 +13,7 @@ interface LoginFormProps {
   signUpText?: string
   signUpLink?: string
   register?: string
+  API: string
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
@@ -27,6 +28,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   signUpText = '¿No tienes cuenta? Regístrate',
   signUpLink = '/signup',
   register = 'Regístrate',
+  API,
 }) => {
   const [formData, setFormData] = useState({
     username: '', // Updated to track username
@@ -35,6 +37,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
+  const [counter, setCounter] = useState(5)
   const t = useTranslation()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,12 +58,93 @@ const LoginForm: React.FC<LoginFormProps> = ({
       return
     }
 
+    const data = {
+      username: formData.username,
+      password: formData.password,
+    }
+
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      // Send POST request using fetch
+      const response = await fetch(`${API}/login/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
       // Provide success feedback
-      setSuccess(t('Inicio de sesión exitoso!', 'Login successful!'))
+      if (response.ok) {
+        const successData = await response.json()
+        // Create an object to store all the data
+        const loginData = {
+          token: successData.token,
+          username: successData.user.username,
+          isLoggedIn: true,
+        }
+
+        // Store the object in localStorage as a JSON string
+        localStorage.setItem('loginData', JSON.stringify(loginData))
+
+        setSuccess(
+          t(
+            `${successData.message} serás redirigido en ${counter} segundos.`,
+            `Successfully logged in, you will be redirected in ${counter} seconds.`
+          )
+        )
+        //I want to see the counter been update here with the interval
+
+        // Countdown and redirect after 5 seconds
+        const interval = setInterval(() => {
+          setCounter((prevCounter) => {
+            if (prevCounter <= 1) {
+              clearInterval(interval)
+              // Back previous page
+              window.history.back()
+              setSuccess(
+                t(
+                  `${successData.message} serás redirigido en ${0} segundos.`,
+                  `Successfully logged in, you will be redirected in ${0} seconds.`
+                )
+              )
+              return 0
+            }
+            setSuccess(
+              t(
+                `${successData.message} serás redirigido a home en ${
+                  prevCounter - 1
+                } segundos.`,
+                `Successfully logged in, you will be redirected to home in ${
+                  prevCounter - 1
+                } seconds.`
+              )
+            )
+            return prevCounter - 1 // This will correctly update the counter
+          })
+        }, 1000)
+      } else {
+        // Handle the error message
+        const errorData = await response.json()
+        console.log('Error response:', errorData)
+        if (errorData.username && errorData.username[0]) {
+          setError(
+            t(
+              'Hubo un problema al llenar el formulario',
+              'There was a problem submitting the form.'
+            )
+          )
+        } else {
+          setError(
+            t(
+              'Hubo un problema al llenar el formulario',
+              'There was a problem submitting the form.'
+            )
+          )
+        }
+      }
+
+      // Provide success feedback
+      //setSuccess(t('Inicio de sesión exitoso!', 'Login successful!'))
       setFormData({
         username: '',
         password: '',

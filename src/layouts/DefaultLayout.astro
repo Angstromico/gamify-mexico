@@ -5,9 +5,10 @@ import  { Header } from '@components/index'
 import { LangPicker, ButtonGradient } from '@components/index.astro'
 import logo from '@assets/logo3.png'
 import { Footer } from '@components/index.astro'
+import type { Lang } from '@interfaces/index'
 
 interface Props {
- lang?: string 
+ lang?: Lang 
  title?: string
  image?: string
  description?: string
@@ -30,7 +31,7 @@ const siteUrl = Astro.url.href
 
 
 <!DOCTYPE html>
- <html lang="es">
+ <html lang={lang}>
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,7 +54,7 @@ const siteUrl = Astro.url.href
   <meta name="og:image" content={image} />
   </head>
   <body>
-   {!noWrapper && <Header client:load />}
+   {!noWrapper && <Header lang={lang} client:load />}
    <ButtonGradient />
    <LangPicker />
    <slot />

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from '@hooks/useTranslations'
 
 interface RegistrationFormProps {
@@ -16,6 +16,8 @@ interface RegistrationFormProps {
   confirmPasswordPlaceholder?: string
   phoneLabel?: string // New prop for phone label
   phonePlaceholder?: string // New prop for phone placeholder
+  GEO_API: string
+  API: string
 }
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({
@@ -33,6 +35,8 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   confirmPasswordPlaceholder = '********',
   phoneLabel = 'Phone Number', // Default value for phone label
   phonePlaceholder = 'Your phone number', // Default value for phone placeholder
+  GEO_API,
+  API,
 }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -46,6 +50,18 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
   const [success, setSuccess] = useState('')
   const t = useTranslation()
 
+  const fetchGeoIp = async () => {
+    try {
+      const response = await fetch(GEO_API)
+      const data = await response.json()
+      const country: string = data.location.country
+      return country
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
@@ -56,13 +72,16 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
     setError('')
     setSuccess('')
 
+    const country = await fetchGeoIp()
+
     // Validation
     if (
       !formData.name ||
       !formData.email ||
       !formData.password ||
       !formData.confirmPassword ||
-      !formData.phone
+      !formData.phone ||
+      !country
     ) {
       setError(
         t('Por favor agregue todos los campos.', 'Please complete all fields.')
@@ -77,23 +96,55 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
 
     try {
       // Prepare data to be sent
-      const data = new FormData()
-      Object.entries(formData).forEach(([key, value]) => {
-        data.append(key, value)
+      const data = {
+        username: formData.name,
+        password: formData.password,
+        email: formData.email,
+        country,
+        phone: formData.phone,
+      }
+
+      // Send POST request using fetch
+      const response = await fetch(`${API}/register/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       })
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
       // Provide success feedback
-      setSuccess(t('Registro Correcto!', 'Registration successful!'))
-      setFormData({
-        name: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        phone: '',
-      }) // Reset form
+      if (response.ok) {
+        // Parse success message from response
+        const successData = await response.json()
+        setSuccess(t(successData.message, 'Registration successful!'))
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          phone: '',
+        }) // Reset form
+      } else {
+        // Handle the error message
+        const errorData = await response.json()
+        console.log('Error response:', errorData)
+        if (errorData.username && errorData.username[0]) {
+          setError(
+            t(
+              `El usuario ya existe: ${errorData.username[0]}`,
+              `Username already exists: ${errorData.username[0]}`
+            )
+          )
+        } else {
+          setError(
+            t(
+              'Hubo un problema al llenar el formulario',
+              'There was a problem submitting the form.'
+            )
+          )
+        }
+      }
     } catch (err) {
       setError(
         t(

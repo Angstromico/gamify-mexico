@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { dynamicTranslate } from 'src/utils'
 import HeaderLink from './HeaderLink'
 import logo from '@assets/logo3.png'
 import NavLinks from './NavLinks'
@@ -9,13 +10,26 @@ import pkg from 'scroll-lock'
 const { disablePageScroll, enablePageScroll } = pkg
 import { navigation } from '@constants/index'
 import NavLink from './NavLink'
+import type { Lang } from '@interfaces/index'
 
-const Header = () => {
+const Header = ({ lang }: { lang: Lang }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [pathname, setPathname] = useState('')
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [username, setUsername] = useState('')
 
   useEffect(() => {
     setPathname(window.location.pathname)
+
+    // Check localStorage for loginData
+    const loginData = localStorage.getItem('loginData')
+    if (loginData) {
+      const parsedData = JSON.parse(loginData)
+      if (parsedData.isLoggedIn) {
+        setIsLoggedIn(true)
+        setUsername(parsedData.username) // Store username
+      }
+    }
   }, [])
 
   const handleClick = () => {
@@ -26,6 +40,15 @@ const Header = () => {
     }
     setIsOpen(true)
     disablePageScroll()
+  }
+
+  const logOutUser = () => {
+    // Clear login data from localStorage
+    localStorage.removeItem('loginData')
+    setIsLoggedIn(false)
+    setUsername('')
+    // Optionally, redirect to homepage after logout
+    window.location.href = '/'
   }
 
   return (
@@ -56,15 +79,34 @@ const Header = () => {
             />
           ))}
         </nav>
-        <nav className='hidden lg:ml-[20rem] lg:flex flex-col lg:flex-row gap-5'>
-          <DynamicLink href='/login' text='New Account' texto='Nueva Cuenta' />
-          <Button
-            text='Sign Up'
-            texto='Suscribete'
-            link={'/signup'}
-            className='hidden lg:flex'
-          />
-        </nav>
+        {/* Conditional navigation based on login status */}
+        {isLoggedIn ? (
+          <nav className='hidden lg:ml-[20rem] lg:flex flex-col lg:flex-row gap-5'>
+            <p className='capitalize'>{username}</p> {/* Display username */}
+            <Button
+              text='Dashboard'
+              texto='Dashboard'
+              link={'/dashboard'}
+              className='hidden lg:flex'
+            />
+            <button
+              className='px-4 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white font-semibold rounded-md shadow-md hover:from-red-600 hover:to-red-800 transition-transform duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50'
+              onClick={logOutUser}
+            >
+              {dynamicTranslate(lang, 'Salir', 'LogOut')}
+            </button>
+          </nav>
+        ) : (
+          <nav className='hidden lg:ml-[20rem] lg:flex flex-col lg:flex-row gap-5'>
+            <DynamicLink href='/login' text='Login' texto='Login' />
+            <Button
+              text='Sign Up'
+              texto='Suscribete'
+              link={'/signup'}
+              className='hidden lg:flex'
+            />
+          </nav>
+        )}
       </div>
       <Button
         onClick={handleClick}

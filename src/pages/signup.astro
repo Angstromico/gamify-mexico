@@ -1,7 +1,6 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro"
 import RegistrationForm from '@components/Signup'
-
 ---
 <DefaultLayout image="/sign.png" title="Pagina de Registro de Gamify Mexico" description="Pagina de Registro de Gamify Mexico">
 <RegistrationForm
@@ -19,6 +18,8 @@ import RegistrationForm from '@components/Signup'
         passwordPlaceholder="********"
         confirmPasswordPlaceholder="********"
         phonePlaceholder="Tu telefono"
+        GEO_API={import.meta.env.GEO_API}
+        API={import.meta.env.API}
         client:load
       />
 </DefaultLayout>

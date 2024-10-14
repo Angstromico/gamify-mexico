@@ -1,3 +1,4 @@
+import useAuthRedirect from '@hooks/useAuthRedirect'
 import type { Lang } from '@interfaces/index'
 import classes from './style.module.scss'
 import {
@@ -17,6 +18,7 @@ import {
 } from '@constants/index'
 
 const Home = ({ lang = 'es' }: { lang?: Lang }) => {
+  useAuthRedirect(lang)
   return (
     <div className={classes.home}>
       <div className={`${classes.box} ${classes.box1}`}>

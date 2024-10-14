@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import useAuthRedirect from '@hooks/useAuthRedirect'
 import ReactPlayer from 'react-player/youtube'
 import { generateBingoCard } from '@constants/index'
 import { dynamicTranslate } from 'src/utils'
@@ -17,6 +18,8 @@ const BingoVideoPlayer: React.FC = ({ lang = 'es' }: { lang?: Lang }) => {
   const [alertMessage, setAlertMessage] = useState<string | null>(null)
   const [comments, setComments] = useState<{ es: string; en: string }[]>([])
   const [newComment, setNewComment] = useState<string>('')
+
+  useAuthRedirect(lang)
 
   const commentsRef = useRef<HTMLDivElement | null>(null)
 
