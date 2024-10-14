@@ -6,9 +6,19 @@ interface Props {
   pathname: string
   isOpen: boolean
   handleClick: () => void
+  onLogOut: () => void
+  isLoggedIn: boolean
+  username: string
 }
 
-const NavLinks = ({ pathname, isOpen, handleClick }: Props) => {
+const NavLinks = ({
+  pathname,
+  isOpen,
+  handleClick,
+  onLogOut,
+  isLoggedIn,
+  username,
+}: Props) => {
   return (
     <nav
       className={`${
@@ -17,6 +27,13 @@ const NavLinks = ({ pathname, isOpen, handleClick }: Props) => {
     >
       {isOpen && (
         <ul className='relative mt-12 lg:mt-0 gap-5 flex flex-col lg:flex-row items-center justify-center m-auto'>
+          {isLoggedIn && (
+            <NavLink
+              title={`Welcome ${username}`}
+              titulo={`Bienvenido Manuel`}
+              isTitle
+            />
+          )}
           {navigation.map((page, i) => (
             <NavLink
               title={page.title}
@@ -29,6 +46,15 @@ const NavLinks = ({ pathname, isOpen, handleClick }: Props) => {
               handleClick={handleClick}
             />
           ))}
+          {isLoggedIn && (
+            <NavLink
+              title='LogOut'
+              titulo='Salir'
+              onlyMobile
+              currentPath='#'
+              handleClick={onLogOut}
+            />
+          )}
         </ul>
       )}
 

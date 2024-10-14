@@ -65,6 +65,9 @@ const Header = ({ lang }: { lang: Lang }) => {
           handleClick={handleClick}
           isOpen={isOpen}
           pathname={pathname}
+          onLogOut={logOutUser}
+          isLoggedIn={isLoggedIn}
+          username={username}
         />
         <nav className='hidden lg:flex justify-between gap-5 items-center'>
           {navigation.map((page, i) => (

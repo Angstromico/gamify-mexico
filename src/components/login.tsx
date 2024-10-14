@@ -111,10 +111,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
             }
             setSuccess(
               t(
-                `${successData.message} serás redirigido a home en ${
+                `${successData.message} serás redirigido en ${
                   prevCounter - 1
                 } segundos.`,
-                `Successfully logged in, you will be redirected to home in ${
+                `Successfully logged in, you will be redirected in ${
                   prevCounter - 1
                 } seconds.`
               )
