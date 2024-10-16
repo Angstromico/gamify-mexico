@@ -3,4 +3,6 @@
 interface ImportMetaEnv {
   readonly GEO_API: string
   readonly API: string
+  readonly WS_BINGO: string
+  readonly BINGO_API: string
 }

@@ -3,5 +3,5 @@ import DefaultLayout from "@layouts/DefaultLayout.astro"
 import BingoVideoPlayer from "@components/BingoVideoPlayer"
 ---
 <DefaultLayout noWrapper>
- <BingoVideoPlayer client:load />
+ <BingoVideoPlayer WS={import.meta.env.WS_BINGO} BINGO_API={import.meta.env.BINGO_API} client:load />
 </DefaultLayout>

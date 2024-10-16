@@ -73,7 +73,7 @@ const BingoCard: React.FC<BingoCardProps> = ({
 
   return (
     <>
-      <div className='w-[59%] md:w-[62%] bg-red-700 mx-auto rounded-t-md'>
+      <div className='w-[59%] sm:w-[62%] bg-red-700 mx-auto rounded-t-md'>
         <h2 className='text-xl text-center font-bold text-white'>Bingo</h2>
       </div>
       {/* Floating alert message with fade effect */}
@@ -90,12 +90,12 @@ const BingoCard: React.FC<BingoCardProps> = ({
           ></div>
         </div>
       </div>
-      <div className='grid grid-cols-5 gap-0 justify-center items-center text-white rounded-lg shadow-lg w-[60%] md:w-[62%] mx-auto'>
+      <div className='grid grid-cols-5 gap-0 justify-center items-center text-white rounded-lg shadow-lg w-[60%] sm:w-[62%] mx-auto'>
         {card.map((number, idx) => (
           <div
             key={idx}
             onClick={() => handleNumberClick(number)} // Handle click event
-            className={`w-6 h-6 md:w-8 md:h-8 cursor-pointer p-1 border-2 border-black flex items-center justify-center font-bold text-xs sm:text-sm md:text-lg bg-opacity-50 ${
+            className={`w-7 h-7 sm:w-8 sm:h-8 cursor-pointer p-1 border-2 border-black flex items-center justify-center font-bold text-xs sm:text-sm md:text-lg bg-opacity-50 ${
               number === 0
                 ? 'bg-red-700'
                 : markedNumbers.has(number) // Check if the number is marked

@@ -457,7 +457,7 @@ export const generateBingoCard = (): number[] => {
   const getRandomNumbers = (count: number): number[] => {
     const numbers = new Set<number>()
     while (numbers.size < count) {
-      numbers.add(Math.floor(Math.random() * 99) + 1)
+      numbers.add(Math.floor(Math.random() * 75) + 1)
     }
     return Array.from(numbers)
   }
