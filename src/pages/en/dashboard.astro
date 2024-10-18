@@ -4,5 +4,5 @@ import DashboardLayout from "@layouts/DashboardLayout.astro"
 ---
 
 <DashboardLayout currentLang="en" title="Dashboard Gamify Mexico" description="Dashboard from Gamify Mexico" menuTitle="MAIN" image="/dashEn.png">
- <Home client:load />
+ <Home client:load API_WALLET={import.meta.env.WALLET_API} />
 </DashboardLayout>

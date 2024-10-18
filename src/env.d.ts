@@ -5,4 +5,5 @@ interface ImportMetaEnv {
   readonly API: string
   readonly WS_BINGO: string
   readonly BINGO_API: string
+  readonly WALLET_API: string
 }

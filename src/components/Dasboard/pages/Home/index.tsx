@@ -8,6 +8,7 @@ import {
   PieChartBox,
   BigChartBox,
   CouponBox,
+  WalletBox,
 } from '@components/Dasboard/components'
 import {
   chartBoxUser,
@@ -18,7 +19,13 @@ import {
   barChartBoxVisit,
 } from '@constants/index'
 
-const Home = ({ lang = 'es' }: { lang?: Lang }) => {
+const Home = ({
+  lang = 'es',
+  API_WALLET,
+}: {
+  lang?: Lang
+  API_WALLET: string
+}) => {
   useAuthRedirect(lang)
   return (
     <div className={classes.home}>
@@ -35,7 +42,7 @@ const Home = ({ lang = 'es' }: { lang?: Lang }) => {
         <PieChartBox lang={lang} />
       </div>
       <div className={`${classes.box} ${classes.box5}`}>
-        <ChartBox lang={lang} {...chartBoxRevenue} />
+        <WalletBox lang={lang} API_WALLET={API_WALLET} />
       </div>
       <div className={`${classes.box} ${classes.box6}`}>
         <CouponBox lang={lang} />
