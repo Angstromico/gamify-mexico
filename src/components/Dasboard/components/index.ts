@@ -6,6 +6,7 @@ import ChartBox from './ChartBox'
 import BarChartBox from './BarchartBox/BarChartBox'
 import PieChartBox from './PieChartBox'
 import BigChartBox from './BigChartBox'
+import CouponBox from './CouponBox'
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   BarChartBox,
   PieChartBox,
   BigChartBox,
+  CouponBox,
 }

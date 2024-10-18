@@ -7,6 +7,7 @@ import {
   BarChartBox,
   PieChartBox,
   BigChartBox,
+  CouponBox,
 } from '@components/Dasboard/components'
 import {
   chartBoxUser,
@@ -37,7 +38,7 @@ const Home = ({ lang = 'es' }: { lang?: Lang }) => {
         <ChartBox lang={lang} {...chartBoxRevenue} />
       </div>
       <div className={`${classes.box} ${classes.box6}`}>
-        <ChartBox lang={lang} {...chartBoxConversion} />
+        <CouponBox lang={lang} />
       </div>
       <div className={`${classes.box} ${classes.box7}`}>
         <BigChartBox lang={lang} />

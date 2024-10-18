@@ -1,5 +1,5 @@
 .home {
-  @apply grid gap-5 grid-flow-dense md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 auto-rows-min-180 w-full;
+  @apply grid gap-5 grid-flow-dense grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 auto-rows-min-180 w-full;
   @media only screen and (min-width: 640px) {
     grid-auto-rows: minmax(120px, auto);
   }
@@ -11,6 +11,6 @@
     @apply col-span-1 md:row-span-3;
   }
   .box7 {
-    @apply md:col-span-2 md:row-span-2;
+    @apply lg:col-span-2 md:row-span-2;
   }
 }

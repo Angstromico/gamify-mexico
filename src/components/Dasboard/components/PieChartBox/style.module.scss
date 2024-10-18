@@ -4,7 +4,7 @@
     @apply flex justify-center items-center h-full w-full;
   }
   .options {
-    @apply flex justify-between gap-2 text-sm;
+    @apply flex justify-between gap-2 text-xs sm:text-sm flex-wrap;
     .option {
       @apply flex flex-col justify-center items-center gap-2;
       .title {
