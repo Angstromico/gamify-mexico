@@ -1,51 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import useAuthRedirect from '@hooks/useAuthRedirect'
+import useFetchBingoGames from '@hooks/useFetchBingoGames'
 import ReactPlayer from 'react-player/youtube'
 import { generateBingoCard } from '@constants/index'
 import { dynamicTranslate } from 'src/utils'
 import type { Lang } from '@interfaces/index'
 import BingoCard from './BingoCard'
 import initBall from '@assets/balotas/tapa.png'
-
-interface BingoGame {
-  id: number
-  dateGame: string
-  day: string
-  hour: string
-  week: number
-  year: number
-  description: string
-  quantity_cartons: number
-  figure_1: boolean
-  amount_figure_1: number
-  winner_1: boolean
-  figure_2: boolean
-  amount_figure_2: number
-  winner_2: boolean
-  figure_3: boolean
-  amount_figure_3: number
-  winner_3: boolean
-  figure_4: boolean
-  amount_figure_4: number
-  winner_4: boolean
-  figure_5: boolean
-  amount_figure_5: number
-  winner_5: boolean
-  figure_6: boolean
-  amount_figure_6: number
-  winner_6: boolean
-  player_cartons: number
-  finished: boolean
-  points_to_distribute: number
-  started: boolean
-  idRQ: string | null
-  advertising: string | null
-  ballot_advertising: number
-  all_trivia: boolean
-  trivia_category: string | null
-  users: unknown[] // Assuming you need to define user types later
-  trivias: unknown[] // Assuming you will define trivia types later
-}
 
 const BingoVideoPlayer = ({
   lang = 'es',
@@ -71,7 +32,7 @@ const BingoVideoPlayer = ({
   const [socketNumbers, setSocketNumbers] = useState<null | Array<
     number | string
   >>(null)
-  const [gameTimes, setGameTimes] = useState<{ id: number; date: Date }[]>([])
+  const gameTimes = useFetchBingoGames(BINGO_API)
   const [balls, setBalls] = useState<Array<Array<string[]>>>([])
 
   useAuthRedirect(lang)
@@ -88,89 +49,6 @@ const BingoVideoPlayer = ({
     }
 
     setBalls((prevBalls) => [...prevBalls, dataArray])
-  }, [])
-
-  useEffect(() => {
-    setIsMounted(true)
-
-    const getTimeDifferenceWithMexicoCity = () => {
-      // Get the current time in the user's local time zone
-      const localDate = new Date()
-      const localTime = localDate.getTime() // Get the current time in milliseconds
-      const localOffset = localDate.getTimezoneOffset() * 60000 // Get the local time zone offset in milliseconds
-
-      // Convert local time to UTC
-      const utc = localTime + localOffset
-
-      // Define the Mexico City offset (UTC-6)
-      const mexicoCityOffset = -6 // UTC-6 for Mexico City
-      const mexicoCityTime = utc + 3600000 * mexicoCityOffset // Adjust the time by -6 hours
-
-      // Get the current time in Mexico City
-      const mexicoCityDate = new Date(mexicoCityTime)
-
-      // Calculate the difference in hours between the two time zones
-      const hoursDifference =
-        (localDate.getTime() - mexicoCityDate.getTime()) / 3600000 // Convert milliseconds to hours
-
-      // Return the difference where positive means local time is ahead and negative means local time is behind
-      return hoursDifference
-    }
-
-    const getDates = async () => {
-      try {
-        const response = await fetch(BINGO_API)
-        const data: BingoGame[] = await response.json() // Assume data is an array of BingoGame
-
-        // Get the user's current time zone
-        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
-        const mexicanTimeZone = 'America/Mexico_City' // Define Mexico's time zone
-
-        if (Array.isArray(data)) {
-          // Process each bingo game in the array
-          const parsedGameTimes = data
-            .map((game) => {
-              if (game.id && game.hour) {
-                const today = new Date() // Current date
-                const [hours, minutes, seconds] = game.hour
-                  .split(':')
-                  .map(Number) // Split the time string into components
-
-                // Create a Date object for today with the hour from the API (Mexico time zone)
-                let gameDate = new Date(today.setHours(hours, minutes, seconds))
-
-                // Check if the user's time zone is different from the Mexican time zone
-                if (userTimeZone !== mexicanTimeZone) {
-                  // Get the time difference in hours
-                  const timeDifference = getTimeDifferenceWithMexicoCity()
-                  // Adjust gameDate according to the time difference
-                  gameDate.setHours(gameDate.getHours() + timeDifference)
-                }
-
-                return {
-                  id: game.id,
-                  date: gameDate, // Use the Date object created above (converted if needed)
-                }
-              } else {
-                console.error('Invalid game data:', game)
-                return null
-              }
-            })
-            .filter((game): game is { id: number; date: Date } => game !== null) // Type guard to ensure non-null values
-
-          // Set the gameTimes state
-          setGameTimes(parsedGameTimes) // Now TypeScript knows this is the correct type
-        } else {
-          console.error('Invalid data structure: ', data)
-        }
-
-        return data
-      } catch (error) {
-        console.error('Error fetching bingo data:', error)
-      }
-    }
-
-    getDates()
   }, [])
 
   useEffect(() => {
@@ -274,6 +152,7 @@ const BingoVideoPlayer = ({
 
   // Generate 4 random bingo cards
   useEffect(() => {
+    setIsMounted(true)
     const generatedCards = Array.from({ length: 4 }, () => generateBingoCard())
     setCards(generatedCards)
   }, [])
