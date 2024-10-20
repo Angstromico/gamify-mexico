@@ -39,7 +39,7 @@ import {
 
 export const navigation = [
   {
-    id: 2,
+    id: 1,
     title: 'Hero',
     titulo: 'Banner',
     url: '#hero',
@@ -55,7 +55,7 @@ export const navigation = [
     onlyMobile: false,
   },
   {
-    id: '4',
+    id: '3',
     title: 'New account',
     titulo: 'Nueva cuenta',
     url: '/en/signup',
@@ -63,7 +63,7 @@ export const navigation = [
     onlyMobile: true,
   },
   {
-    id: '5',
+    id: '4',
     title: 'Login',
     titulo: 'Login',
     url: '/en/login',
@@ -76,6 +76,14 @@ export const navigation = [
     titulo: 'Bingo',
     url: '/en/bingo',
     link: '/bingo',
+    onlyMobile: false,
+  },
+  {
+    id: '7',
+    title: 'Quiz',
+    titulo: 'Trivia',
+    url: '/en/trivia',
+    link: '/trivia',
     onlyMobile: false,
   },
 ]
