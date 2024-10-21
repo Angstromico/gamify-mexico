@@ -13,8 +13,6 @@ import {
 import {
   chartBoxUser,
   chartBoxProduct,
-  chartBoxRevenue,
-  chartBoxConversion,
   barChartBoxRevenue,
   barChartBoxVisit,
 } from '@constants/index'
@@ -22,15 +20,17 @@ import {
 const Home = ({
   lang = 'es',
   API_WALLET,
+  BINGO_API,
 }: {
   lang?: Lang
   API_WALLET: string
+  BINGO_API: string
 }) => {
   useAuthRedirect(lang)
   return (
     <div className={classes.home}>
       <div className={`${classes.box} ${classes.box1}`}>
-        <TopBox lang={lang} />
+        <TopBox lang={lang} BINGO_API={BINGO_API} />
       </div>
       <div className={`${classes.box} ${classes.box2}`}>
         <ChartBox lang={lang} {...chartBoxUser} />
