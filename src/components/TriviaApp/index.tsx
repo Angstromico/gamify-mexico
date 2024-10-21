@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import useAuthRedirect from '@hooks/useAuthRedirect'
 import { dynamicTranslate } from 'src/utils'
 import TriviaCard from './TriviaCard'
@@ -11,9 +11,17 @@ interface Question {
   correctAnswer: string
 }
 
-function TriviaApp({ lang = 'es' }: { lang?: Lang }) {
+function TriviaApp({
+  lang = 'es',
+  idTrivia = 0,
+  WS = '',
+}: {
+  lang?: Lang
+  idTrivia: number
+  WS: string
+}) {
   const [isMounted, setIsMounted] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState<null | Question>(null)
+  const [currentQuestion, setCurrentQuestion] = useState<null | any>(null)
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [askedQuestions, setAskedQuestions] = useState<number[]>([])
   const [showPopup, setShowPopup] = useState(false)
@@ -21,10 +29,60 @@ function TriviaApp({ lang = 'es' }: { lang?: Lang }) {
 
   useAuthRedirect(lang)
 
+  const handleWebSocketData = useCallback((data: any) => {
+    let dataArray: Array<string[]> = []
+    console.log(data)
+    if (data.tipo_ws === 'started') {
+      dataArray.push(['inicio'])
+    } else if (data.tipo_ws === 'question') {
+      setCurrentQuestion({
+        question: data.trivia.question,
+        options: [
+          data.trivia.option_a,
+          data.trivia.option_b,
+          data.trivia.option_c,
+        ],
+      })
+    }
+  }, [])
+
   const t = (es: string, en: string) => dynamicTranslate(lang, es, en)
 
   useEffect(() => {
     setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    const connectSocket = () => {
+      const socket = new WebSocket(`${WS}${idTrivia}/`)
+      console.log(`${WS}${idTrivia}/`)
+      socket.onopen = () => {
+        console.log('WebSocket connection established')
+        const loginData = localStorage.getItem('loginData')
+        if (loginData) {
+          const { token } = JSON.parse(loginData)
+          socket.send(JSON.stringify({ token }))
+        }
+      }
+
+      socket.onmessage = (event) => {
+        const data = JSON.parse(event.data)
+        handleWebSocketData(data)
+      }
+
+      socket.onerror = (error) => {
+        console.error('WebSocket error:', error)
+      }
+
+      socket.onclose = () => {
+        console.log(`WebSocket connection closed for socket`)
+        connectSocket() // Try reconnecting with the next socket number
+      }
+    }
+
+    connectSocket()
+
+    // Cleanup function to close socket on unmount
   }, [])
 
   const questions: Question[] = [
@@ -95,13 +153,14 @@ function TriviaApp({ lang = 'es' }: { lang?: Lang }) {
 
   return (
     <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center'>
-      <div className='relative w-screen h-screen md:h-[80vh] max-w-[400px]'>
+      <div className='relative w-screen h-screen max-w-[400px]'>
         {isMounted && (
           <ReactPlayer
             url='https://www.youtube.com/shorts/636beEW2S6Q?autoplay=1&rel=0&showinfo=0&controls=0&modestbranding=0'
             width='100%'
             height='100%'
-            playing
+            playing={true}
+            controls={false}
             loop
             className='rounded-xl overflow-hidden'
             style={{ objectFit: 'cover' }}

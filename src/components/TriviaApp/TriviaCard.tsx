@@ -87,7 +87,9 @@ function TriviaCard({
             {options.map((option, index) => (
               <button
                 key={index}
-                onClick={() => handleAnswer(option)}
+                onClick={() =>
+                  handleAnswer(index == 0 ? 'A' : index == 1 ? 'B' : 'C')
+                }
                 className='bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded'
               >
                 {option}
