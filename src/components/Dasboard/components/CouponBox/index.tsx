@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { dynamicTranslate } from 'src/utils'
 import classes from './style.module.scss'
 import type { Lang } from '@interfaces/index'
@@ -9,7 +9,12 @@ const generateSecretCode = () => {
 }
 
 const CouponBox = ({ lang }: { lang: Lang }) => {
-  const [secretCode, setSecretCode] = useState(generateSecretCode())
+  const [secretCode, setSecretCode] = useState<string | null>(null)
+
+  useEffect(() => {
+    // Generate the code only on the client side
+    setSecretCode(generateSecretCode())
+  }, [])
 
   return (
     <div className={classes.coupon}>
@@ -23,7 +28,10 @@ const CouponBox = ({ lang }: { lang: Lang }) => {
           {dynamicTranslate(lang, 'Código secreto', 'Secret Code')}:
         </p>
         <div className='flex w-full items-center justify-center sm:justify-start bg-white text-n-4 px-4 py-2 rounded-lg'>
-          <span className='font-mono text-xl'>{secretCode}</span>
+          <span className='font-mono text-xl'>
+            {/* Show code if available */}
+            {secretCode ? secretCode : '...'}
+          </span>
         </div>
         <button
           onClick={() => setSecretCode(generateSecretCode())}
