@@ -44,7 +44,7 @@ const BingoVideoPlayer = ({
     if (data.tipo_ws === 'inicio') {
       dataArray.push(['inicio'])
     } else if (data.tipo_ws === 'ballot') {
-      const reversedUltimas = [...data.ultimas].reverse().slice(0, 4)
+      const reversedUltimas = [...data.last5].reverse().slice(0, 4)
       dataArray.push(reversedUltimas)
     }
 
