@@ -1,0 +1,58 @@
+---
+import BingoSingle from "@components/BingoVideoPlayer/BingoSingle"
+import type { BingoGame, Lang } from '@interfaces/index'
+
+interface Props {
+ lang?: Lang
+}
+
+const WS = import.meta.env.WS_BINGO
+
+const fetchBingoIds = async () => {
+  const apiLink = import.meta.env.BINGO_API
+  try {
+    const response = await fetch(apiLink)
+    const data: BingoGame[] = await response.json()
+    const ids = data
+      .map(d => {
+        if (d.id) {
+          return { id: d.id }
+        }
+      })
+      .filter(Boolean) // Ensure no undefined values
+    return ids
+  } catch (error) {
+    console.error(error)
+    return [] // Return an empty array in case of an error
+  }
+}
+
+const ids = await fetchBingoIds()
+
+const isChoosen = ids.find(id => id?.id == Astro.params.id) 
+
+// Fetch Bingo IDs at request time
+export async function get({ params }: { params: {id: string}}) {
+  const apiLink = import.meta.env.BINGO_API
+  try {
+    const response = await fetch(apiLink)
+    const data: BingoGame[] = await response.json()
+    const ids = data.map(d => ({ id: d.id })).filter(Boolean)
+    const id = params.id
+
+    return {
+      body: { id, ids }
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      status: 500,
+      body: { error: "Error fetching Bingo IDs" }
+    }
+  }
+}
+
+const {lang} = Astro.props
+---
+
+<BingoSingle client:load lang={lang} WS={WS} socketNumber={isChoosen ? isChoosen.id : undefined} />

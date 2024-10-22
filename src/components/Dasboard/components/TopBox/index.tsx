@@ -60,7 +60,7 @@ const TopBox = ({ lang, BINGO_API }: { lang: Lang; BINGO_API: string }) => {
       )}
       {gameTimes.length > 0 && (
         <ul className={classes.list}>
-          {gameTimes.slice(0, 6).map((game) => {
+          {gameTimes.slice(-6).map((game) => {
             const { id, date } = game
             const countdown = countdowns[id]
             const isExpired = !countdown
@@ -88,7 +88,7 @@ const TopBox = ({ lang, BINGO_API }: { lang: Lang; BINGO_API: string }) => {
                   </div>
                 </div>
                 <a
-                  href={`/bingo/${id}`}
+                  href={`${dynamicTranslate(lang, '', '/en')}/bingo/${id}`}
                   className={`${classes.amount} ${isExpired ? classes.disabled : ''}`}
                   onClick={(e) => isExpired && e.preventDefault()} // Disable link if the game has expired
                 >
