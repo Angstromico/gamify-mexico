@@ -2,12 +2,15 @@
   .item {
     @apply pl-2 sm:pl-0 flex flex-col gap-3 mb-5 font-extralight;
     .title {
-      @apply text-sm text-color-soft capitalize;
+      @apply hidden sm:block text-sm text-color-soft capitalize;
     }
     .listItem {
       @apply text-[0.5rem] sm:text-base flex items-center gap-2 sm:p-2 rounded-md;
       &:hover {
         @apply bg-color-softBg;
+      }
+      span {
+        @apply hidden sm:block;
       }
     }
   }
