@@ -6,9 +6,9 @@ import ReactPlayer from 'react-player/youtube'
 import type { Lang } from '@interfaces/index'
 
 interface Question {
+  id: number
   question: string
   options: string[]
-  correctAnswer: string
 }
 
 function TriviaApp({
@@ -21,21 +21,27 @@ function TriviaApp({
   WS: string
 }) {
   const [isMounted, setIsMounted] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState<null | any>(null)
+  const [currentQuestion, setCurrentQuestion] = useState<Question>({
+    id: 0,
+    question: '',
+    options: [],
+  })
   const [isGameStarted, setIsGameStarted] = useState(false)
   const [askedQuestions, setAskedQuestions] = useState<number[]>([])
   const [showPopup, setShowPopup] = useState(false)
   const [popupMessage, setPopupMessage] = useState('')
+  const [openTriviaQuestions, setOpenTriviaQuestions] = useState(false)
 
   useAuthRedirect(lang)
 
   const handleWebSocketData = useCallback((data: any) => {
     let dataArray: Array<string[]> = []
     console.log(data)
-    if (data.tipo_ws === 'started') {
+    if (data.type_ws === 'started') {
       dataArray.push(['inicio'])
-    } else if (data.tipo_ws === 'question') {
+    } else if (data.type_ws === 'question') {
       setCurrentQuestion({
+        id: data.trivia.id,
         question: data.trivia.question,
         options: [
           data.trivia.option_a,
@@ -43,6 +49,8 @@ function TriviaApp({
           data.trivia.option_c,
         ],
       })
+    } else if (data.type_ws === 'close_trivia') {
+      setOpenTriviaQuestions(false)
     }
   }, [])
 
@@ -51,6 +59,10 @@ function TriviaApp({
   useEffect(() => {
     setIsMounted(true)
   }, [])
+
+  useEffect(() => {
+    setOpenTriviaQuestions(true)
+  }, [currentQuestion])
 
   useEffect(() => {
     const connectSocket = () => {
@@ -85,48 +97,16 @@ function TriviaApp({
     // Cleanup function to close socket on unmount
   }, [])
 
-  const questions: Question[] = [
-    {
-      question: t(
-        '¿Cuál es la capital de Francia?',
-        'What is the capital of France?'
-      ),
-      options: [t('París', 'Paris'), t('Londres', 'London'), t('Roma', 'Rome')],
-      correctAnswer: t('París', 'Paris'),
-    },
-    {
-      question: t(
-        '¿Cuál es la montaña más alta del mundo?',
-        'What is the tallest mountain in the world?'
-      ),
-      options: [t('Monte Everest', 'Mount Everest'), 'K2', 'Kangchenjunga'],
-      correctAnswer: t('Monte Everest', 'Mount Everest'),
-    },
-  ]
-
   const startGame = () => {
-    selectRandomQuestion()
     setIsGameStarted(true)
     setAskedQuestions([])
   }
 
-  const selectRandomQuestion = () => {
-    const availableQuestions = questions.filter(
-      (_, index) => !askedQuestions.includes(index)
-    )
-    if (availableQuestions.length === 0) return
-
-    const randomIndex = Math.floor(Math.random() * availableQuestions.length)
-    const question = availableQuestions[randomIndex]
-    setCurrentQuestion(question)
-
-    const originalIndex = questions.indexOf(question)
-    setAskedQuestions((prev) => [...prev, originalIndex])
-  }
-
-  const handleAnswer = (answer: string | null) => {
+  const handleAnswer = () => {
+    return true
+    /*
     if (currentQuestion) {
-      if (answer === currentQuestion.correctAnswer) {
+      if (answer === currentQuestion) {
         setPopupMessage(
           t(
             '¡Felicidades! Respuesta correcta.',
@@ -148,12 +128,12 @@ function TriviaApp({
       setTimeout(() => {
         setShowPopup(false)
       }, 2000)
-    }
+    }*/
   }
 
   return (
-    <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center'>
-      <div className='relative w-screen h-screen max-w-[400px]'>
+    <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center w-full'>
+      <div className='relative w-screen h-screen h-[100vh] max-w-[400px]'>
         {isMounted && (
           <ReactPlayer
             url='https://www.youtube.com/shorts/636beEW2S6Q?autoplay=1&rel=0&showinfo=0&controls=0&modestbranding=0'
@@ -170,16 +150,10 @@ function TriviaApp({
           <h1 className='text-center text-3xl font-bold mb-4 text-yellow-600'>
             {t('¡Desafío de trivia!', 'Trivia Challenge!')}
           </h1>
-          {!isGameStarted && (
-            <button
-              className='bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded'
-              onClick={startGame}
-            >
-              {t('Comenzar Juego', 'Start Game')}
-            </button>
-          )}
-          {isGameStarted && currentQuestion && (
+          {openTriviaQuestions && (
             <TriviaCard
+              triviaGameId={idTrivia}
+              questionId={currentQuestion.id}
               question={currentQuestion.question}
               options={currentQuestion.options}
               onAnswer={handleAnswer}

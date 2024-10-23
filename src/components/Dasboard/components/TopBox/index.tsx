@@ -4,8 +4,16 @@ import classes from './style.module.scss'
 import { dynamicTranslate } from 'src/utils'
 import type { Lang } from '@interfaces/index'
 
-const TopBox = ({ lang, BINGO_API }: { lang: Lang; BINGO_API: string }) => {
-  const gameTimes = useFetchBingoGames(BINGO_API)
+const TopBox = ({
+  lang,
+  API,
+  title,
+}: {
+  lang: Lang
+  API: string
+  title: string
+}) => {
+  const gameTimes = useFetchBingoGames(API)
   const [countdowns, setCountdowns] = useState<{ [key: string]: any }>({})
 
   const calculateCountdown = (date: Date) => {
@@ -48,7 +56,7 @@ const TopBox = ({ lang, BINGO_API }: { lang: Lang; BINGO_API: string }) => {
 
   return (
     <div className={classes.topBox}>
-      <h1>{dynamicTranslate(lang, 'Juegos Bingo Hoy', 'Bingo Games Today')}</h1>
+      <h1>{title}</h1>
       {gameTimes.length < 0 && (
         <div className={classes.noGames}>
           {dynamicTranslate(

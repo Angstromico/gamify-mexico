@@ -44,3 +44,24 @@ export interface BingoGame {
   users: unknown[]
   trivias: unknown[]
 }
+
+interface Game {
+  id: number
+  dateGame: string // ISO date string format
+  day: string // Day of the week
+  hour: string // Time in 'HH:mm:ss' format
+  week: number
+  year: number
+  title: string
+  points: number
+  start: boolean
+  end: boolean
+  level: string
+  idRQ: string | null // Nullable field
+  startVideo: string
+  created_at: string // ISO date string format
+  category: string | null // Nullable field
+}
+
+// This would represent an array of games
+export type Games = Game[]

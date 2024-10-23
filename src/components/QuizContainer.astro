@@ -1,0 +1,30 @@
+---
+import TriviaApps from "@components/TriviaApp"
+import type { Lang, Games } from "@interfaces/index"
+
+interface Props {
+ lang?: Lang
+}
+
+const fetchApi = async() => {
+ try {
+  const response = await fetch(`${Astro.url.origin}/api/h`)
+  const data: Games = await response.json()
+  const ids = data.map(id => id.id)
+  return ids
+ } catch (error) {
+  console.error(error)
+  return null
+ }
+}
+
+const ids = await fetchApi()
+
+
+const {lang = 'es'} = Astro.props
+const {id} = Astro.params
+
+const isChoosen = id ? ids?.find(idQuiz => idQuiz === +id ) : undefined
+---
+
+{isChoosen && <TriviaApps lang={lang} idTrivia={isChoosen} WS={import.meta.env.WS_TRIVIA} client:load />}

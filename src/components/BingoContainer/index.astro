@@ -9,9 +9,8 @@ interface Props {
 const WS = import.meta.env.WS_BINGO
 
 const fetchBingoIds = async () => {
-  const apiLink = import.meta.env.BINGO_API
   try {
-    const response = await fetch(apiLink)
+    const response = await fetch(`${Astro.url.origin}/api/bingo`)
     const data: BingoGame[] = await response.json()
     const ids = data
       .map(d => {

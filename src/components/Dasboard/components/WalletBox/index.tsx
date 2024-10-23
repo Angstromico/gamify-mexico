@@ -45,7 +45,7 @@ const WalletBox = ({
       <h2>
         {dynamicTranslate(lang, 'Saldo de su billetera', 'Your Wallet Balance')}
       </h2>
-      <p>${balance}</p>
+      <p>{balance} Pts</p>
     </div>
   )
 }

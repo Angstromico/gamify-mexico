@@ -21,16 +21,22 @@ const Home = ({
   lang = 'es',
   API_WALLET,
   BINGO_API,
+  bingoTitle,
+  QUIZ_API,
+  quizTitle,
 }: {
   lang?: Lang
   API_WALLET: string
   BINGO_API: string
+  bingoTitle: string
+  QUIZ_API: string
+  quizTitle: string
 }) => {
   useAuthRedirect(lang)
   return (
     <div className={classes.home}>
       <div className={`${classes.box} ${classes.box1}`}>
-        <TopBox lang={lang} BINGO_API={BINGO_API} />
+        <TopBox title={bingoTitle} lang={lang} API={BINGO_API} />
       </div>
       <div className={`${classes.box} ${classes.box2}`}>
         <ChartBox lang={lang} {...chartBoxUser} />
@@ -39,7 +45,7 @@ const Home = ({
         <ChartBox lang={lang} {...chartBoxProduct} />
       </div>
       <div className={`${classes.box} ${classes.box4}`}>
-        <PieChartBox lang={lang} />
+        <TopBox title={quizTitle} lang={lang} API={QUIZ_API} />
       </div>
       <div className={`${classes.box} ${classes.box5}`}>
         <WalletBox lang={lang} API_WALLET={API_WALLET} />

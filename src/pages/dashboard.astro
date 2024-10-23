@@ -1,10 +1,12 @@
 ---
 import { Home } from "@components/Dasboard/pages";
 import DashboardLayout from "@layouts/DashboardLayout.astro"
+
+const apiLink = import.meta.env.QUIZ_API
 ---
 
 <DashboardLayout title="Dashboard Gamify Mexico" description="Dashboard de Gamify Mexico" menuTitle="PRINCIPAL" image="/dash.png">
- <Home BINGO_API={import.meta.env.BINGO_API} client:load API_WALLET={import.meta.env.WALLET_API}  />
+  <Home bingoTitle="Bingo Games Today" BINGO_API={import.meta.env.BINGO_API} client:load API_WALLET={import.meta.env.WALLET_API} QUIZ_API={apiLink} quizTitle="Juego trivia hoy"  />
 </DashboardLayout>
 
 
