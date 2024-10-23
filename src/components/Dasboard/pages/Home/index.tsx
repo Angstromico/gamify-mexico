@@ -5,7 +5,6 @@ import {
   TopBox,
   ChartBox,
   BarChartBox,
-  PieChartBox,
   BigChartBox,
   CouponBox,
   WalletBox,
@@ -36,7 +35,12 @@ const Home = ({
   return (
     <div className={classes.home}>
       <div className={`${classes.box} ${classes.box1}`}>
-        <TopBox title={bingoTitle} lang={lang} API={BINGO_API} />
+        <TopBox
+          gameText='bingo'
+          title={bingoTitle}
+          lang={lang}
+          API={BINGO_API}
+        />
       </div>
       <div className={`${classes.box} ${classes.box2}`}>
         <ChartBox lang={lang} {...chartBoxUser} />
@@ -45,7 +49,12 @@ const Home = ({
         <ChartBox lang={lang} {...chartBoxProduct} />
       </div>
       <div className={`${classes.box} ${classes.box4}`}>
-        <TopBox title={quizTitle} lang={lang} API={QUIZ_API} />
+        <TopBox
+          gameText='trivia'
+          title={quizTitle}
+          lang={lang}
+          API={QUIZ_API}
+        />
       </div>
       <div className={`${classes.box} ${classes.box5}`}>
         <WalletBox lang={lang} API_WALLET={API_WALLET} />

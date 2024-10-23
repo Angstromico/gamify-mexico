@@ -8,10 +8,12 @@ const TopBox = ({
   lang,
   API,
   title,
+  gameText,
 }: {
   lang: Lang
   API: string
   title: string
+  gameText: string
 }) => {
   const gameTimes = useFetchBingoGames(API)
   const [countdowns, setCountdowns] = useState<{ [key: string]: any }>({})
@@ -80,7 +82,6 @@ const TopBox = ({
                     {id}
                   </span>
                   <div className={classes.text}>
-                    {/* Display countdown if game is still available */}
                     {countdown ? (
                       <div className='text-[0.6rem] flex gap-1 flex-wrap'>
                         {/* {dynamicTranslate(lang, 'Comienza en:', 'Starts in:')} */}{' '}
@@ -96,7 +97,7 @@ const TopBox = ({
                   </div>
                 </div>
                 <a
-                  href={`${dynamicTranslate(lang, '', '/en')}/bingo/${id}`}
+                  href={`${dynamicTranslate(lang, '', '/en')}/${gameText}/${id}`}
                   className={`${classes.amount} ${isExpired ? classes.disabled : ''}`}
                   onClick={(e) => isExpired && e.preventDefault()} // Disable link if the game has expired
                 >
