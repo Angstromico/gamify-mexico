@@ -67,13 +67,15 @@ function TriviaApp({
   useEffect(() => {
     const connectSocket = () => {
       const socket = new WebSocket(`${WS}${idTrivia}/`)
-      console.log(`${WS}${idTrivia}/`)
       socket.onopen = () => {
         console.log('WebSocket connection established')
         const loginData = localStorage.getItem('loginData')
         if (loginData) {
           const { token } = JSON.parse(loginData)
-          socket.send(JSON.stringify({ token }))
+          const headers = {
+            authToken: `${token}`,
+          }
+          socket.send(JSON.stringify({ headers }))
         }
       }
 
@@ -132,8 +134,8 @@ function TriviaApp({
   }
 
   return (
-    <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center w-full'>
-      <div className='relative w-screen h-screen h-[100vh] max-w-[400px]'>
+    <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center'>
+      <div className='relative w-screen h-screen max-w-[400px]'>
         {isMounted && (
           <ReactPlayer
             url='https://www.youtube.com/shorts/636beEW2S6Q?autoplay=1&rel=0&showinfo=0&controls=0&modestbranding=0'
