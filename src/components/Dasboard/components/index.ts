@@ -8,6 +8,8 @@ import PieChartBox from './PieChartBox'
 import BigChartBox from './BigChartBox'
 import CouponBox from './CouponBox'
 import WalletBox from './WalletBox'
+import StreamerBox from './StreamerBox'
+import AddStreamerBox from './AddStreamerBox'
 
 export {
   Navbar,
@@ -20,4 +22,6 @@ export {
   BigChartBox,
   CouponBox,
   WalletBox,
+  StreamerBox,
+  AddStreamerBox,
 }

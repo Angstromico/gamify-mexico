@@ -8,6 +8,8 @@ import {
   BigChartBox,
   CouponBox,
   WalletBox,
+  StreamerBox,
+  AddStreamerBox,
 } from '@components/Dasboard/components'
 import {
   chartBoxUser,
@@ -15,6 +17,7 @@ import {
   barChartBoxRevenue,
   barChartBoxVisit,
 } from '@constants/index'
+import { useState } from 'react'
 
 const Home = ({
   lang = 'es',
@@ -70,6 +73,14 @@ const Home = ({
       </div>
       <div className={`${classes.box} ${classes.box9}`}>
         <BarChartBox lang={lang} {...barChartBoxVisit} />
+      </div>
+
+      <div className={`${classes.box} ${classes.box10}`}>
+        <StreamerBox lang={lang} />
+      </div>
+
+      <div className={`${classes.box} ${classes.box10}`}>
+        <AddStreamerBox lang={lang} />
       </div>
     </div>
   )
