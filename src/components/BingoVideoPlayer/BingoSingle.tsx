@@ -294,7 +294,7 @@ const BingoSingle = ({
             <div className='grid grid-cols-2 gap-4 justify-between items-center'>
               {drawnBalls.length === 0 && (
                 <img
-                  className={`h-12 w-12 text-sm md:w-16 md:h-16 rounded-full text-slate-500 font-bold flex items-center justify-center mx-2 mb-4 cursor-pointer transition-colors `}
+                  className={`w-14 md:w-20 rounded-full text-slate-500 font-bold flex items-center justify-center mx-2 mb-4 cursor-pointer transition-colors `}
                   src={initBall.src}
                   alt={dynamicTranslate(lang, 'Bola', 'Bola')}
                 />
@@ -303,7 +303,7 @@ const BingoSingle = ({
                 //The balls are showing in here, can you do it?
                 <img
                   key={idx}
-                  className={`h-12 w-12 text-sm md:w-16 md:h-16 rounded-full text-slate-500 font-bold flex items-center justify-center mx-2 mb-4 cursor-pointer transition-colors ${
+                  className={`w-14 md:w-20 rounded-full text-slate-500 font-bold flex items-center justify-center mx-2 mb-4 cursor-pointer transition-colors ${
                     markedNumbers.has(ball) ? 'bg-green-500' : ''
                   } ${fadeOutBalls.has(ball) ? 'animate-fadeOut' : ''}`}
                   src={`/balotas/bola${ball}.png`}
