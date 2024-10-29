@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { dynamicTranslate } from 'src/utils'
 import classes from './style.module.scss'
 import type { Lang } from '@interfaces/index'
@@ -15,9 +15,9 @@ const AddStreamerBox = ({ lang }: { lang: Lang }) => {
       formData.append('email', email)
 
       const response = fetch(
-        'http://127.0.0.1:8000/api-v01/streamer/add-streamer/',
+        'http://api.gamifymexico.com/api-v01/streamer/add-streamer/',
         {
-          method: 'PUT',
+          method: 'POST',
           headers: {
             Authorization: `Token ${token}`,
           },

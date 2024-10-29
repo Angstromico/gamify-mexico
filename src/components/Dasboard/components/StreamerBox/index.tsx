@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { dynamicTranslate } from 'src/utils'
 import classes from './style.module.scss'
 import type { Lang } from '@interfaces/index'
@@ -18,13 +18,16 @@ const StreamerBox = ({ lang }: { lang: Lang }) => {
       formData.append('urlStreaming', on_live ? urlStream : '')
       formData.append('on_live', on_live.toString())
 
-      const response = fetch('http://127.0.0.1:8000/api-v01/streamer/update/', {
-        method: 'PUT',
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-        body: formData,
-      })
+      const response = fetch(
+        'http://api.gamifymexico.com/api-v01/streamer/update/',
+        {
+          method: 'PUT',
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+          body: formData,
+        }
+      )
         .then((response) => {
           // Verificar si la respuesta fue exitosa
           if (!response.ok) {
