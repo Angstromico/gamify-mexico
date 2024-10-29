@@ -1,4 +1,5 @@
 import useAuthRedirect from '@hooks/useAuthRedirect'
+import useAuthStatus from '@hooks/useAuthStatus'
 import type { Lang } from '@interfaces/index'
 import classes from './style.module.scss'
 import {
@@ -35,6 +36,8 @@ const Home = ({
   quizTitle: string
 }) => {
   useAuthRedirect(lang)
+  const { isAdmin, isStreamer } = useAuthStatus()
+
   return (
     <div className={classes.home}>
       <div className={`${classes.box} ${classes.box1}`}>
@@ -75,13 +78,17 @@ const Home = ({
         <BarChartBox lang={lang} {...barChartBoxVisit} />
       </div>
 
-      <div className={`${classes.box} ${classes.box10}`}>
-        <StreamerBox lang={lang} />
-      </div>
+      {isStreamer && (
+        <div className={`${classes.box} ${classes.box10}`}>
+          <StreamerBox lang={lang} />
+        </div>
+      )}
 
-      <div className={`${classes.box} ${classes.box10}`}>
-        <AddStreamerBox lang={lang} />
-      </div>
+      {isAdmin && (
+        <div className={`${classes.box} ${classes.box10}`}>
+          <AddStreamerBox lang={lang} />
+        </div>
+      )}
     </div>
   )
 }

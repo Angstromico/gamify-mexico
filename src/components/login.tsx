@@ -76,15 +76,16 @@ const LoginForm: React.FC<LoginFormProps> = ({
       // Provide success feedback
       if (response.ok) {
         const successData = await response.json()
+
         // Create an object to store all the data
+        const isStreamer = successData.user.streamer
         const loginData = {
           token: successData.token,
           username: successData.user.username,
           isLoggedIn: true,
-          userRole: successData.user.user_rol,
+          admin: successData.user.is_superuser,
+          streamer: isStreamer ? isStreamer : null,
         }
-
-        console.log(loginData)
 
         // Store the object in localStorage as a JSON string
         localStorage.setItem('loginData', JSON.stringify(loginData))
@@ -95,7 +96,6 @@ const LoginForm: React.FC<LoginFormProps> = ({
             `Successfully logged in, you will be redirected in ${counter} seconds.`
           )
         )
-        //I want to see the counter been update here with the interval
 
         // Countdown and redirect after 5 seconds
         const interval = setInterval(() => {
