@@ -81,7 +81,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
           token: successData.token,
           username: successData.user.username,
           isLoggedIn: true,
+          userRole: successData.user.user_rol,
         }
+
+        console.log(loginData)
 
         // Store the object in localStorage as a JSON string
         localStorage.setItem('loginData', JSON.stringify(loginData))
