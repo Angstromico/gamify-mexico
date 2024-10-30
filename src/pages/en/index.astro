@@ -1,6 +1,6 @@
 ---
 import DefaultLayout from "@layouts/DefaultLayout.astro" 
-import { Hero, Video, BingoComponent, Timer } from '@components/index'
+import { Hero, Video, BingoComponent, Timer, HeroBalls } from '@components/index'
 import AboutUs from "@components/AboutUs.astro"
 
 const aboutUs = `HELLO! Thank you for being here.
@@ -39,6 +39,7 @@ const values = `We value cultural richness, fairness, and player satisfaction, c
 
 <DefaultLayout lang="en" rights="All rights reserved" image="/introEn.png" description="Play Bingo in real time online">
 	<Hero lang="en" {...heroText} client:load />
+	<HeroBalls lang="en" client:load />
 	<Timer lang="en" client:load target={target} />
 	<Video lang="en" client:visible />
 	<AboutUs 
