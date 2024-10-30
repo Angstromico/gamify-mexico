@@ -8,4 +8,5 @@ interface ImportMetaEnv {
   readonly WALLET_API: string
   readonly WS_TRIVIA: string
   readonly QUIZ_API: string
+  readonly PUBLIC_STREAM: string
 }
