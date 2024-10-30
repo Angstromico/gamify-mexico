@@ -123,9 +123,9 @@ const StreamerBox = ({ lang }: { lang: Lang }) => {
               style={{ border: 'none' }}
             />
           </div>
-          {error && <p className='text-red-500 text-sm mt-2'>{error}</p>}
         </div>
       )}
+      {error && <p className='text-red-500 text-sm mt-4'>{error}</p>}
 
       {/* Stream Toggle Button */}
       <div className='flex flex-col gap-3 md:flex-row items-center mt-4 w-full justify-center'>
