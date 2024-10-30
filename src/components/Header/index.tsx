@@ -53,11 +53,11 @@ const Header = ({ lang }: { lang: Lang }) => {
 
   return (
     <header
-      className={`fixed flex lg:block justify-between items-center top-0 left-0 w-full z-50  border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
+      className={`fixed flex lg:block justify-between items-center top-0 left-0 w-full z-50 border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm ${
         isOpen ? 'bg-n-8' : 'bg-n-8/90 backdrop-blur-sm'
       }`}
     >
-      <div className='relative flex items-center justify-between px-5 lg:px-7.5 xl:px-10 max-lg:py-4'>
+      <div className='relative flex items-center justify-start lg:justify-between px-5 lg:px-7.5 xl:px-10 max-lg:py-4 max-w-screen-2xl mx-auto w-full lg:w-auto'>
         <HeaderLink>
           <img className='max-w-36' src={logo.src} alt='Logo' />
         </HeaderLink>
@@ -69,7 +69,7 @@ const Header = ({ lang }: { lang: Lang }) => {
           isLoggedIn={isLoggedIn}
           username={username}
         />
-        <nav className='hidden lg:flex justify-between gap-5 items-center'>
+        <nav className='hidden lg:flex justify-between gap-5 items-center flex-wrap'>
           {navigation.map((page, i) => (
             <NavLink
               title={page.title}
@@ -84,7 +84,7 @@ const Header = ({ lang }: { lang: Lang }) => {
         </nav>
         {/* Conditional navigation based on login status */}
         {isLoggedIn ? (
-          <nav className='hidden lg:ml-[20rem] lg:flex flex-col lg:flex-row gap-5'>
+          <nav className='hidden lg:flex gap-5 items-center flex-wrap'>
             <p className='capitalize'>{username}</p> {/* Display username */}
             <Button
               text='Dashboard'
@@ -100,8 +100,13 @@ const Header = ({ lang }: { lang: Lang }) => {
             </button>
           </nav>
         ) : (
-          <nav className='hidden lg:ml-[20rem] lg:flex flex-col lg:flex-row gap-5'>
-            <DynamicLink href='/login' text='Login' texto='Login' />
+          <nav className='hidden lg:flex gap-5 items-center flex-wrap'>
+            <DynamicLink
+              href='/login'
+              text='Login'
+              texto='Login'
+              className='hidden lg:flex'
+            />
             <Button
               text='Sign Up'
               texto='Suscribete'
@@ -122,4 +127,5 @@ const Header = ({ lang }: { lang: Lang }) => {
     </header>
   )
 }
+
 export default Header
