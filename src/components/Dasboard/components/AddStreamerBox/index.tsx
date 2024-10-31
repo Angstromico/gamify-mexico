@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { dynamicTranslate } from 'src/utils'
 import classes from './style.module.scss'
 import type { Lang } from '@interfaces/index'
@@ -10,7 +10,6 @@ const AddStreamerBox = ({ lang }: { lang: Lang }) => {
     const loginData = localStorage.getItem('loginData')
     if (loginData) {
       const { token } = JSON.parse(loginData)
-      console.log('token', token)
       const formData = new FormData()
       formData.append('email', email)
 
@@ -48,7 +47,7 @@ const AddStreamerBox = ({ lang }: { lang: Lang }) => {
   return (
     <div className={classes.coupon}>
       <h2>
-        {dynamicTranslate(lang, 'Inicia tu streaming', 'start streaming')}
+        {dynamicTranslate(lang, 'Agreaga un Streamer', 'Start some streaming')}
       </h2>
 
       {/* Secret Code Section */}

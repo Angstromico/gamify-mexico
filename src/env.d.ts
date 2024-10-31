@@ -9,4 +9,5 @@ interface ImportMetaEnv {
   readonly WS_TRIVIA: string
   readonly QUIZ_API: string
   readonly PUBLIC_STREAM: string
+  readonly PUBLIC_STREAMS: string
 }
