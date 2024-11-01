@@ -6,6 +6,8 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import { Navigation } from 'swiper/modules'
 import type { Lang } from '@interfaces/index'
+import TriviaComponent from './TriviaComponent'
+import MiniBingo from './MiniBingo'
 
 const Modal = ({
   isOpen,
@@ -26,7 +28,7 @@ const Modal = ({
       onClick={onClose}
     >
       <div
-        className='bg-white p-6 rounded-lg max-w-sm w-full text-center text-black'
+        className='bg-n-8 p-3 rounded-lg max-w-3xl w-full text-center text-n-1'
         onClick={(e) => e.stopPropagation()}
       >
         {content}
@@ -52,9 +54,10 @@ const MenuButton = ({
 }) => (
   <button
     onClick={onClick}
-    className='flex flex-col items-center justify-center w-[180px] h-[180px] m-3 text-white bg-blue-500 rounded-full hover:bg-blue-700'
+    className='flex flex-col items-center justify-center w-[180px] h-[180px] m-3 text-white bg-[#333] rounded-full hover:opacity-80'
   >
     {icon}
+
     <span className='mt-1 text-xs'>{label}</span>
   </button>
 )
@@ -94,51 +97,21 @@ const HeroBalls = ({ lang = 'es' }: { lang?: Lang }) => {
             <MenuButton
               icon={<FaQuestionCircle size={24} />}
               label={dynamicTranslate(lang, 'Trivias', 'Trivia')}
-              onClick={() =>
-                openModal(
-                  <div>
-                    {dynamicTranslate(
-                      lang,
-                      'Contenido de Trivias',
-                      'Trivia Content'
-                    )}
-                  </div>
-                )
-              }
+              onClick={() => openModal(<TriviaComponent />)}
             />
           </SwiperSlide>
           <SwiperSlide className='flex justify-center w-full lg:w-1/3 mx-auto'>
             <MenuButton
               icon={<FaCalendarAlt size={24} />}
               label={dynamicTranslate(lang, 'Bingo', 'Bingo')}
-              onClick={() =>
-                openModal(
-                  <div>
-                    {dynamicTranslate(
-                      lang,
-                      'Contenido de Bingo',
-                      'Bingo Content'
-                    )}
-                  </div>
-                )
-              }
+              onClick={() => openModal(<MiniBingo />)}
             />
           </SwiperSlide>
           <SwiperSlide className='flex justify-center w-full lg:w-1/3 mx-auto'>
             <MenuButton
               icon={<FaGift size={24} />}
               label={dynamicTranslate(lang, 'Recompensas', 'Rewards')}
-              onClick={() =>
-                openModal(
-                  <div>
-                    {dynamicTranslate(
-                      lang,
-                      'Contenido de Recompensas',
-                      'Rewards Content'
-                    )}
-                  </div>
-                )
-              }
+              onClick={() => openModal(<div></div>)}
             />
           </SwiperSlide>
         </Swiper>
