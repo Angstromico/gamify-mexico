@@ -8,6 +8,7 @@ import { Navigation } from 'swiper/modules'
 import type { Lang } from '@interfaces/index'
 import TriviaComponent from './TriviaComponent'
 import MiniBingo from './MiniBingo'
+import RewardsComponent from './RewardsComponent'
 
 const Modal = ({
   isOpen,
@@ -111,7 +112,7 @@ const HeroBalls = ({ lang = 'es' }: { lang?: Lang }) => {
             <MenuButton
               icon={<FaGift size={24} />}
               label={dynamicTranslate(lang, 'Recompensas', 'Rewards')}
-              onClick={() => openModal(<div></div>)}
+              onClick={() => openModal(<RewardsComponent lang={lang} />)}
             />
           </SwiperSlide>
         </Swiper>
