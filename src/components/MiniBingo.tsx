@@ -121,7 +121,7 @@ const MiniBingo = () => {
   const arrText = currentLang.get() === 'es' ? esText : enText
 
   return (
-    <div className='flex flex-col items-center justify-center overflow-y-auto max-h-[1000px] w-full h-full bg-n-8 text-n-1'>
+    <div className='flex flex-col items-center justify-center overflow-y-auto max-h-[1000px] w-full h-full bg-n-8 text-n-1 no-scrollbar'>
       <div className='w-full md:w-1/2 h-[200px] md:h-[400px] mb-4 md:mb-0 cursor-grab'>
         <Canvas camera={{ position: [0, 0, 5] }}>
           <ambientLight intensity={0.5} />
