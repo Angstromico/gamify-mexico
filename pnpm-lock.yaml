@@ -10,16 +10,16 @@ dependencies:
     version: 0.9.4(typescript@5.6.3)
   '@astrojs/netlify':
     specifier: ^5.5.4
-    version: 5.5.4(astro@4.16.7)(sass@1.80.5)
+    version: 5.5.4(astro@4.16.8)(sass@1.80.5)
   '@astrojs/react':
     specifier: ^3.6.2
     version: 3.6.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)(vite@5.4.10)
   '@astrojs/tailwind':
     specifier: ^5.1.1
-    version: 5.1.2(astro@4.16.7)(tailwindcss@3.4.14)
+    version: 5.1.2(astro@4.16.8)(tailwindcss@3.4.14)
   '@astrojs/vercel':
     specifier: ^7.8.2
-    version: 7.8.2(astro@4.16.7)(react@18.3.1)
+    version: 7.8.2(astro@4.16.8)(react@18.3.1)
   '@nanostores/react':
     specifier: ^0.7.3
     version: 0.7.3(nanostores@0.11.3)(react@18.3.1)
@@ -36,8 +36,8 @@ dependencies:
     specifier: ^18.3.0
     version: 18.3.1
   astro:
-    specifier: ^4.15.8
-    version: 4.16.7(sass@1.80.5)(typescript@5.6.3)
+    specifier: ^4.16.8
+    version: 4.16.8(sass@1.80.5)(typescript@5.6.3)
   gamifymex:
     specifier: 'file:'
     version: file:(@types/three@0.169.0)(vite@5.4.10)
@@ -187,7 +187,7 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/netlify@5.5.4(astro@4.16.7)(sass@1.80.5):
+  /@astrojs/netlify@5.5.4(astro@4.16.8)(sass@1.80.5):
     resolution: {integrity: sha512-nIjD8cC/lGCxTtBUDrG50YEwmsgNxGB1nMZS0wwT7tFlmT2iBpYkTz3G+wmpxH89Hzs1xuMs1s21IcITyuKqEw==}
     peerDependencies:
       astro: ^4.2.0
@@ -196,7 +196,7 @@ packages:
       '@astrojs/underscore-redirects': 0.3.4
       '@netlify/functions': 2.8.2
       '@vercel/nft': 0.27.5
-      astro: 4.16.7(sass@1.80.5)(typescript@5.6.3)
+      astro: 4.16.8(sass@1.80.5)(typescript@5.6.3)
       esbuild: 0.21.5
       vite: 5.4.10(sass@1.80.5)
     transitivePeerDependencies:
@@ -239,13 +239,13 @@ packages:
       - vite
     dev: false
 
-  /@astrojs/tailwind@5.1.2(astro@4.16.7)(tailwindcss@3.4.14):
+  /@astrojs/tailwind@5.1.2(astro@4.16.8)(tailwindcss@3.4.14):
     resolution: {integrity: sha512-IvOF0W/dtHElcXvhrPR35nHmhyV3cfz1EzPitMGtU7sYy9Hci3BNK1To6FWmVuuNKPxza1IgCGetSynJZL7fOg==}
     peerDependencies:
       astro: ^3.0.0 || ^4.0.0 || ^5.0.0-beta.0
       tailwindcss: ^3.0.24
     dependencies:
-      astro: 4.16.7(sass@1.80.5)(typescript@5.6.3)
+      astro: 4.16.8(sass@1.80.5)(typescript@5.6.3)
       autoprefixer: 10.4.20(postcss@8.4.47)
       postcss: 8.4.47
       postcss-load-config: 4.0.2(postcss@8.4.47)
@@ -273,7 +273,7 @@ packages:
     resolution: {integrity: sha512-vYuYtIrTwxFlDRIhuekscorsHdLL8Hr3mgOczfM1tRWVPn54dDNcKG0DmfL4DlC5YJRoqVaVdUs508Hw643NTw==}
     dev: false
 
-  /@astrojs/vercel@7.8.2(astro@4.16.7)(react@18.3.1):
+  /@astrojs/vercel@7.8.2(astro@4.16.8)(react@18.3.1):
     resolution: {integrity: sha512-U2JsfN0LzFMX5CPrcb+5bAAyqyYURP6Dk/mUIXX87r5x4baQy+juU+ntvf926YA0tR7u6jPRXHymE2axQ/l3NQ==}
     peerDependencies:
       astro: ^4.2.0
@@ -282,7 +282,7 @@ packages:
       '@vercel/analytics': 1.3.2(react@18.3.1)
       '@vercel/edge': 1.1.2
       '@vercel/nft': 0.27.5
-      astro: 4.16.7(sass@1.80.5)(typescript@5.6.3)
+      astro: 4.16.8(sass@1.80.5)(typescript@5.6.3)
       esbuild: 0.21.5
       fast-glob: 3.3.2
       web-vitals: 3.5.2
@@ -551,7 +551,7 @@ packages:
     resolution: {integrity: sha512-kEBmG8KyqtxJZv+ygbEim+KCGtIq1fC22Ms3S4ziXmYKm8uyoLX0MHONVKwp+9opg390VaKRNt4a7A9NwmpNhw==}
     requiresBuild: true
     dependencies:
-      tslib: 2.8.0
+      tslib: 2.8.1
     dev: false
     optional: true
 
@@ -1996,8 +1996,8 @@ packages:
     resolution: {integrity: sha512-I1jXZMjAgCMmxT4qxXfPXa6SthSoE8h6gkSI9BGGNv8mP8G/v0blc+qFnZu6K42vTOiuME596QaLO0TP3Lk0xg==}
     dev: false
 
-  /astro@4.16.7(sass@1.80.5)(typescript@5.6.3):
-    resolution: {integrity: sha512-nON+8MUEkWTFwXbS4zsQIq4t0Fs42eulM4x236AL+qNnWfqNAOOqAnFxO1dxfJ1q+XopIBbbT9Mtev+0zH47PQ==}
+  /astro@4.16.8(sass@1.80.5)(typescript@5.6.3):
+    resolution: {integrity: sha512-BRWFP0UQ8gkOr90KQW7oooedtgCk/j91pyv1WQUmgZwMUZk/v0HJRiddAZgvGCECOnmZFc9ZqRZnBsAMUgApNQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     dependencies:
@@ -5008,6 +5008,12 @@ packages:
     resolution: {integrity: sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA==}
     dev: false
 
+  /tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /tunnel-rat@0.1.2(@types/react@18.3.12)(react@18.3.1):
     resolution: {integrity: sha512-lR5VHmkPhzdhrM092lI2nACsLO4QubF0/yoOhzX7c+wIpbN1GjHNzCc91QlpxBi+cnx8vVJ+Ur6vL5cEoQPFpQ==}
     dependencies:
@@ -5657,16 +5663,16 @@ packages:
     name: gamifymex
     dependencies:
       '@astrojs/check': 0.9.4(typescript@5.6.3)
-      '@astrojs/netlify': 5.5.4(astro@4.16.7)(sass@1.80.5)
+      '@astrojs/netlify': 5.5.4(astro@4.16.8)(sass@1.80.5)
       '@astrojs/react': 3.6.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1)(react@18.3.1)(vite@5.4.10)
-      '@astrojs/tailwind': 5.1.2(astro@4.16.7)(tailwindcss@3.4.14)
-      '@astrojs/vercel': 7.8.2(astro@4.16.7)(react@18.3.1)
+      '@astrojs/tailwind': 5.1.2(astro@4.16.8)(tailwindcss@3.4.14)
+      '@astrojs/vercel': 7.8.2(astro@4.16.8)(react@18.3.1)
       '@nanostores/react': 0.7.3(nanostores@0.11.3)(react@18.3.1)
       '@react-three/drei': 9.115.0(@react-three/fiber@8.17.10)(@types/react@18.3.12)(@types/three@0.169.0)(react-dom@18.3.1)(react@18.3.1)(three@0.169.0)
       '@react-three/fiber': 8.17.10(react-dom@18.3.1)(react@18.3.1)(three@0.169.0)
       '@types/react': 18.3.12
       '@types/react-dom': 18.3.1
-      astro: 4.16.7(sass@1.80.5)(typescript@5.6.3)
+      astro: 4.16.8(sass@1.80.5)(typescript@5.6.3)
       nanostores: 0.11.3
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -5676,6 +5682,7 @@ packages:
       recharts: 2.13.2(react-dom@18.3.1)(react@18.3.1)
       sass: 1.80.5
       scroll-lock: 2.1.5
+      swiper: 11.1.14
       tailwindcss: 3.4.14
       three: 0.169.0
       typescript: 5.6.3
