@@ -10,4 +10,5 @@ interface ImportMetaEnv {
   readonly QUIZ_API: string
   readonly PUBLIC_STREAM: string
   readonly PUBLIC_STREAMS: string
+  readonly PUBLIC_COMMENTS: string
 }
