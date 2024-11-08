@@ -133,6 +133,44 @@ function TriviaApp({
     }*/
   }
 
+  useEffect(() => {
+    const loginData = localStorage.getItem('loginData')
+    const streamerData = localStorage.getItem('selectedStreamer')
+
+    if (loginData && streamerData) {
+      const { token } = JSON.parse(loginData)
+      const streamer = JSON.parse(streamerData)
+      const idStreamer = streamer.id
+      const commentsApi = `${
+        import.meta.env.PUBLIC_COMMENTS
+      }${idTrivia}-streamer-${idStreamer}/`
+
+      const commentsSocket = new WebSocket(commentsApi)
+
+      commentsSocket.onopen = () => {
+        console.log('Comments WebSocket connection established')
+        commentsSocket.send(JSON.stringify({ authToken: token }))
+      }
+
+      commentsSocket.onmessage = (event) => {
+        const response = JSON.parse(event.data)
+        console.log('Received comment:', response) // Console log para estudiar la respuesta
+      }
+
+      commentsSocket.onerror = (error) => {
+        console.error('Comments WebSocket error:', error)
+      }
+
+      commentsSocket.onclose = () => {
+        console.log('Comments WebSocket connection closed')
+      }
+
+      return () => {
+        commentsSocket.close()
+      }
+    }
+  }, [idTrivia])
+
   return (
     <div className='relative w-screen h-screen bg-black bg-opacity-30 flex items-center justify-center'>
       <div className='relative w-screen h-screen max-w-[400px]'>
