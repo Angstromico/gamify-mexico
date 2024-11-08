@@ -28,15 +28,6 @@ function TriviaCard({
   const loginData = localStorage.getItem('loginData')
 
   useEffect(() => {
-    if (loginData) {
-      const { token } = JSON.parse(loginData)
-      console.log('token', token)
-    } else {
-      console.log('No hay token en localStorage')
-    }
-  }, [loginData])
-
-  useEffect(() => {
     resetQuestion()
     return () => clearTimer() // Cleanup on unmount or question change
   }, [question]) // Reset when a new question comes
